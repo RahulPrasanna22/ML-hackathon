@@ -1,0 +1,106 @@
+{
+  "ui": "http://localhost:5173",
+  "api": "http://localhost:8000",
+  "trip_buttons": 10,
+  "header": "PathSnap |  | Distributed Map Matching & Route Reconstruction | Laptop 1 API \u00b7 Connected | localhost:8000 \u00b7 38 ms | Connection",
+  "runs": [
+    {
+      "trip_id": "00000052",
+      "ui_seconds": 0.47,
+      "status": "Trip 00000052 evaluated in 248 ms (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 6823,
+      "api_top1_pct": 100.0,
+      "ui_top1_pct": 100.0,
+      "api_macro_f1_pct": 100.0,
+      "ui_macro_f1_pct": 100.0,
+      "api_route_segments": 93,
+      "ui_route_segments": 93,
+      "screenshot": "reports\\integration\\ui_trip_00000052.png"
+    },
+    {
+      "trip_id": "00000007",
+      "ui_seconds": 1.0,
+      "status": "Trip 00000007 evaluated in 356 ms (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 5050,
+      "api_top1_pct": 99.5,
+      "ui_top1_pct": 99.5,
+      "api_macro_f1_pct": 99.6,
+      "ui_macro_f1_pct": 99.6,
+      "api_route_segments": 123,
+      "ui_route_segments": 123,
+      "screenshot": "reports\\integration\\ui_trip_00000007.png"
+    },
+    {
+      "trip_id": "00000077",
+      "ui_seconds": 2.32,
+      "status": "Trip 00000077 evaluated in 1.76 s (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 10688,
+      "api_top1_pct": 75.2,
+      "ui_top1_pct": 75.2,
+      "api_macro_f1_pct": 86.1,
+      "ui_macro_f1_pct": 86.1,
+      "api_route_segments": 366,
+      "ui_route_segments": 366,
+      "screenshot": "reports\\integration\\ui_trip_00000077.png"
+    }
+  ],
+  "checks": {
+    "trip_buttons_loaded": true,
+    "routes_drawn": true,
+    "top1_matches_api": true,
+    "macro_f1_matches_api": true,
+    "route_segments_match_api": true,
+    "history_lists_all_runs": true,
+    "no_console_errors": true,
+    "no_tile_errors": true
+  },
+  "api_calls": [
+    [
+      "GET",
+      "http://localhost:5173/?api=",
+      200
+    ],
+    [
+      "GET",
+      "/health",
+      200
+    ],
+    [
+      "GET",
+      "/evaluation/trips",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ]
+  ],
+  "history_trips_listed": [
+    "00000052",
+    "00000007",
+    "00000077"
+  ],
+  "console_errors": [],
+  "tile_requests": 50,
+  "tile_status_counts": {
+    "200": 50
+  },
+  "failed_requests": [
+    "http://localhost:8000/health",
+    "http://localhost:8000/evaluation/trips"
+  ]
+}

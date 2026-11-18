@@ -1,0 +1,13 @@
+{
+  "beta": 22.28306214923603,
+  "emission_weight": 0.21466451328493905,
+  "sigma": 0.0,
+  "prob_floor": 1e-06,
+  "same_arc_tol": 26.69913537320635,
+  "vmax": 50.0,
+  "base_limit": 300.0,
+  "max_limit": 6000.0,
+  "gap_break_s": 600.0,
+  "break_penalty": 26.80571913147971,
+  "reverse_penalty": 7.350270205342977
+}

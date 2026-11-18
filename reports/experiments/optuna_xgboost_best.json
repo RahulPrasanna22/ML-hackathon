@@ -1,0 +1,24 @@
+{
+  "model": "xgboost",
+  "best_value_cv_top1": 0.9130056242920208,
+  "best_params": {
+    "n_estimators": 900,
+    "learning_rate": 0.06054365855469246,
+    "max_depth": 10,
+    "min_child_weight": 0.5497167787383098,
+    "subsample": 0.9849549260809971,
+    "colsample_bytree": 0.899465584480253,
+    "reg_lambda": 0.0070689749506246055
+  },
+  "best_trial": 1,
+  "n_trials": 22,
+  "optimisation_seconds_this_run": 3154.8856370449066,
+  "best_user_attrs": {
+    "cv_cand_macro_f1": 0.9466345568351692,
+    "cv_log_loss": 0.09134786427021027,
+    "cv_top1_std": 0.01449546536718572,
+    "fit_seconds_total": 187.3248336315155
+  },
+  "sampler": "TPE(seed=42, n_startup_trials=10)",
+  "objective": "mean GroupKFold(5) observation-level top-1 accuracy (train partition)"
+}

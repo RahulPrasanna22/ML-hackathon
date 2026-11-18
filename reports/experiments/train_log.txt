@@ -1,0 +1,61 @@
+train rows=1291898 obs=182350 | student_test rows=146913
+nearest_road {'model': 'nearest_road', 'family': 'Geometric baseline (no learning)', 'params': '{}', 'cv_top1_accuracy': np.float64(0.5609441826506057), 'cv_route_continuity': np.float64(0.41372972017596404), 'st_top1_accuracy': 0.5318371607515657, 'st_top3_accuracy': 0.9506784968684759, 'st_candidate_miss_rate': 0.002139874739039649, 'st_route_continuity': 0.4474404152350341, 'st_invalid_transitions': 3416, 'st_n_obs': 19160}
+=== logreg
+  fold 0: top1=0.8675 macroF1=0.9047 logloss=0.1346 cont=0.7382 fit=2.0s (train top1=0.8953)
+  fold 1: top1=0.8910 macroF1=0.9231 logloss=0.1000 cont=0.7920 fit=2.2s (train top1=0.8850)
+  fold 2: top1=0.8832 macroF1=0.9260 logloss=0.0917 cont=0.8079 fit=2.3s (train top1=0.8888)
+  fold 3: top1=0.9004 macroF1=0.9278 logloss=0.0961 cont=0.7962 fit=1.8s (train top1=0.8897)
+  fold 4: top1=0.8967 macroF1=0.9245 logloss=0.1145 cont=0.7736 fit=1.9s (train top1=0.8879)
+  student-test: top1=0.8668 macroF1=0.9136 logloss=0.1037 cont=0.7983
+=== gaussian_nb
+  fold 0: top1=0.8571 macroF1=0.8592 logloss=0.7176 cont=0.7561 fit=0.3s (train top1=0.8623)
+  fold 1: top1=0.8750 macroF1=0.8602 logloss=0.6337 cont=0.7788 fit=0.3s (train top1=0.8504)
+  fold 2: top1=0.8685 macroF1=0.8635 logloss=0.5308 cont=0.8076 fit=0.3s (train top1=0.8555)
+  fold 3: top1=0.8464 macroF1=0.8511 logloss=0.6777 cont=0.8062 fit=0.3s (train top1=0.8560)
+  fold 4: top1=0.8327 macroF1=0.8377 logloss=0.9585 cont=0.7600 fit=0.3s (train top1=0.8621)
+  student-test: top1=0.8338 macroF1=0.8498 logloss=0.7063 cont=0.8277
+=== random_forest
+  fold 0: top1=0.8878 macroF1=0.9317 logloss=0.0915 cont=0.7978 fit=63.4s (train top1=0.9534)
+  fold 1: top1=0.9248 macroF1=0.9562 logloss=0.0577 cont=0.8214 fit=64.1s (train top1=0.9502)
+  fold 2: top1=0.9091 macroF1=0.9473 logloss=0.0596 cont=0.8280 fit=63.5s (train top1=0.9508)
+  fold 3: top1=0.9155 macroF1=0.9474 logloss=0.0653 cont=0.8333 fit=94.5s (train top1=0.9543)
+  fold 4: top1=0.9177 macroF1=0.9466 logloss=0.0752 cont=0.8187 fit=64.0s (train top1=0.9495)
+  student-test: top1=0.9005 macroF1=0.9408 logloss=0.0682 cont=0.8381
+=== extra_trees
+  fold 0: top1=0.8857 macroF1=0.9295 logloss=0.0946 cont=0.7944 fit=47.3s (train top1=0.9487)
+  fold 1: top1=0.9195 macroF1=0.9523 logloss=0.0625 cont=0.8206 fit=47.8s (train top1=0.9460)
+  fold 2: top1=0.9047 macroF1=0.9435 logloss=0.0656 cont=0.8333 fit=47.5s (train top1=0.9453)
+  fold 3: top1=0.9129 macroF1=0.9446 logloss=0.0701 cont=0.8381 fit=48.5s (train top1=0.9484)
+  fold 4: top1=0.9163 macroF1=0.9450 logloss=0.0786 cont=0.8197 fit=50.7s (train top1=0.9453)
+  student-test: top1=0.8966 macroF1=0.9367 logloss=0.0724 cont=0.8305
+=== hist_gb
+  fold 0: top1=0.8835 macroF1=0.9286 logloss=0.1091 cont=0.7519 fit=11.9s (train top1=0.9429)
+  fold 1: top1=0.9195 macroF1=0.9540 logloss=0.0735 cont=0.7827 fit=10.9s (train top1=0.9358)
+  fold 2: top1=0.9092 macroF1=0.9473 logloss=0.0668 cont=0.8024 fit=12.5s (train top1=0.9437)
+  fold 3: top1=0.9093 macroF1=0.9452 logloss=0.0750 cont=0.7980 fit=11.6s (train top1=0.9490)
+  fold 4: top1=0.9134 macroF1=0.9449 logloss=0.0862 cont=0.7793 fit=11.3s (train top1=0.9423)
+  student-test: top1=0.8866 macroF1=0.9348 logloss=0.0965 cont=0.7960
+=== lightgbm
+  fold 0: top1=0.8863 macroF1=0.9305 logloss=0.0968 cont=0.7981 fit=9.5s (train top1=0.9568)
+  fold 1: top1=0.9273 macroF1=0.9577 logloss=0.0555 cont=0.8175 fit=9.7s (train top1=0.9539)
+  fold 2: top1=0.9134 macroF1=0.9493 logloss=0.0574 cont=0.8274 fit=15.8s (train top1=0.9535)
+  fold 3: top1=0.9150 macroF1=0.9482 logloss=0.0630 cont=0.8344 fit=22.2s (train top1=0.9590)
+  fold 4: top1=0.9178 macroF1=0.9473 logloss=0.0735 cont=0.8203 fit=36.1s (train top1=0.9541)
+  student-test: top1=0.8982 macroF1=0.9391 logloss=0.0720 cont=0.8352
+=== xgboost
+  fold 0: top1=0.8876 macroF1=0.9314 logloss=0.0928 cont=0.7984 fit=41.8s (train top1=0.9534)
+  fold 1: top1=0.9282 macroF1=0.9577 logloss=0.0550 cont=0.8190 fit=17.2s (train top1=0.9510)
+  fold 2: top1=0.9128 macroF1=0.9483 logloss=0.0573 cont=0.8333 fit=16.7s (train top1=0.9497)
+  fold 3: top1=0.9165 macroF1=0.9488 logloss=0.0627 cont=0.8382 fit=15.8s (train top1=0.9552)
+  fold 4: top1=0.9185 macroF1=0.9476 logloss=0.0727 cont=0.8226 fit=17.1s (train top1=0.9506)
+  student-test: top1=0.8982 macroF1=0.9393 logloss=0.0704 cont=0.8387
+=== mlp
+  fold 0: top1=0.8846 macroF1=0.9277 logloss=0.1078 cont=0.7763 fit=93.8s (train top1=0.9319)
+  fold 1: top1=0.9215 macroF1=0.9527 logloss=0.0647 cont=0.8189 fit=98.0s (train top1=0.9293)
+C:\Users\Raghav\Downloads\ML Hackathon\.venv\Lib\site-packages\sklearn\neural_network\_multilayer_perceptron.py:785: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (40) reached and the optimization hasn't converged yet.
+  warnings.warn(
+  fold 2: top1=0.9087 macroF1=0.9448 logloss=0.0669 cont=0.8165 fit=182.1s (train top1=0.9305)
+  fold 3: top1=0.9086 macroF1=0.9391 logloss=0.0771 cont=0.8307 fit=327.4s (train top1=0.9323)
+  fold 4: top1=0.9141 macroF1=0.9409 logloss=0.0857 cont=0.8022 fit=217.4s (train top1=0.9308)
+  student-test: top1=0.8945 macroF1=0.9351 logloss=0.0752 cont=0.8229
+done

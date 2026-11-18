@@ -41,10 +41,10 @@ The backend must listen on all interfaces and allow the UI's origin:
 
 ```powershell
 $env:PATHSNAP_CORS_ORIGINS = "http://localhost:5173,http://192.168.1.35:5173,http://localhost:4173,http://192.168.1.35:4173"
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level info
+.venv\Scripts\python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --log-level info   # repo root (or run_api.bat)
 ```
 
-(Replace `192.168.1.35` with Laptop 2's IP and `app.main:app` with the real module path.) See `docs/API_CONTRACT.md` for the CORS middleware snippet.
+(Replace `192.168.1.35` with Laptop 2's IP. `run_api.bat` in the repository root runs the same command.) See `docs/API_CONTRACT.md` for the CORS middleware snippet.
 
 Check from Laptop 2:
 

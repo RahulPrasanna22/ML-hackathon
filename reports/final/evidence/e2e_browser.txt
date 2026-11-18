@@ -1,0 +1,26 @@
+{"trip_id": "00000015", "ui_seconds": 1.89, "status": "Trip 00000015 evaluated in 1.60 s (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 13885, "api_top1_pct": 93.3, "ui_top1_pct": 93.3, "api_macro_f1_pct": 96.1, "ui_macro_f1_pct": 96.1, "api_route_segments": 227, "ui_route_segments": 227, "screenshot": "reports\\integration\\ui_trip_00000015.png"}
+{"trip_id": "00000017", "ui_seconds": 1.97, "status": "Trip 00000017 evaluated in 1.57 s (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 20179, "api_top1_pct": 96.3, "ui_top1_pct": 96.3, "api_macro_f1_pct": 98.1, "ui_macro_f1_pct": 98.1, "api_route_segments": 855, "ui_route_segments": 855, "screenshot": "reports\\integration\\ui_trip_00000017.png"}
+{"trip_id": "00000023", "ui_seconds": 0.4, "status": "Trip 00000023 evaluated in 236 ms (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 6516, "api_top1_pct": 95.2, "ui_top1_pct": 95.2, "api_macro_f1_pct": 97.2, "ui_macro_f1_pct": 97.2, "api_route_segments": 96, "ui_route_segments": 96, "screenshot": "reports\\integration\\ui_trip_00000023.png"}
+{"trip_id": "00000030", "ui_seconds": 0.89, "status": "Trip 00000030 evaluated in 536 ms (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 9156, "api_top1_pct": 88.8, "ui_top1_pct": 88.8, "api_macro_f1_pct": 94.0, "ui_macro_f1_pct": 94.0, "api_route_segments": 355, "ui_route_segments": 355, "screenshot": "reports\\integration\\ui_trip_00000030.png"}
+{"trip_id": "00000049", "ui_seconds": 1.44, "status": "Trip 00000049 evaluated in 1.23 s (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 3966, "api_top1_pct": 99.6, "ui_top1_pct": 99.6, "api_macro_f1_pct": 99.7, "ui_macro_f1_pct": 99.7, "api_route_segments": 409, "ui_route_segments": 409, "screenshot": "reports\\integration\\ui_trip_00000049.png"}
+{"trip_id": "00000059", "ui_seconds": 0.94, "status": "Trip 00000059 evaluated in 685 ms (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 4610, "api_top1_pct": 97.6, "ui_top1_pct": 97.6, "api_macro_f1_pct": 98.7, "ui_macro_f1_pct": 98.7, "api_route_segments": 488, "ui_route_segments": 488, "screenshot": "reports\\integration\\ui_trip_00000059.png"}
+{"trip_id": "00000067", "ui_seconds": 0.41, "status": "Trip 00000067 evaluated in 310 ms (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 6897, "api_top1_pct": 97.2, "ui_top1_pct": 97.2, "api_macro_f1_pct": 98.3, "ui_macro_f1_pct": 98.3, "api_route_segments": 82, "ui_route_segments": 82, "screenshot": "reports\\integration\\ui_trip_00000067.png"}
+{"trip_id": "00000073", "ui_seconds": 0.9, "status": "Trip 00000073 evaluated in 616 ms (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 4505, "api_top1_pct": 98.9, "ui_top1_pct": 98.9, "api_macro_f1_pct": 99.4, "ui_macro_f1_pct": 99.4, "api_route_segments": 240, "ui_route_segments": 240, "screenshot": "reports\\integration\\ui_trip_00000073.png"}
+{"trip_id": "00000087", "ui_seconds": 1.44, "status": "Trip 00000087 evaluated in 1.29 s (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 4582, "api_top1_pct": 99.5, "ui_top1_pct": 99.5, "api_macro_f1_pct": 99.7, "ui_macro_f1_pct": 99.7, "api_route_segments": 454, "ui_route_segments": 454, "screenshot": "reports\\integration\\ui_trip_00000087.png"}
+{"trip_id": "00000094", "ui_seconds": 1.94, "status": "Trip 00000094 evaluated in 1.64 s (browser round trip).", "model_in_response": "XGBoost (tuned) + HMM/Viterbi", "drawn_vector_elements_or_pixels": 8205, "api_top1_pct": 96.7, "ui_top1_pct": 96.7, "api_macro_f1_pct": 98.1, "ui_macro_f1_pct": 98.1, "api_route_segments": 635, "ui_route_segments": 635, "screenshot": "reports\\integration\\ui_trip_00000094.png"}
+{
+ "trip_buttons_loaded": true,
+ "routes_drawn": true,
+ "top1_matches_api": true,
+ "macro_f1_matches_api": true,
+ "route_segments_match_api": true,
+ "history_lists_all_runs": true,
+ "no_console_errors": true,
+ "no_tile_errors": true
+}
+tiles: {'200': 177} | failed requests: 20 | API calls: 16
+E2E PASSED
+e2e exit=0
+failed requests by type: {'https://tile.openstreetmap.org/{z}/{x}/{y}.png': 10}
+dashboard checks: {"connected_header": true, "10_trip_buttons": true, "gps_trace_layer": true, "predicted_route_layer": true, "hmm_effect_chart": true, "model_comparison_8_rows": true, "xgboost_marked_selected": true, "history_entry": true, "no_console_errors": true}
+ALL DASHBOARD CHECKS PASSED

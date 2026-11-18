@@ -1201,3 +1201,173 @@ code {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------------------ model comparison (TRAIN CV) */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.models__scope {
+  margin-left: 0;
+  color: var(--c-warn);
+  background: rgba(242, 181, 68, 0.12);
+  border: 1px solid rgba(242, 181, 68, 0.35);
+}
+
+.models__caption {
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+  margin: 0 0 12px;
+}
+
+.models__tablewrap {
+  overflow-x: auto;
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--r-md);
+}
+
+.models__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  min-width: 760px;
+}
+
+.models__table th,
+.models__table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--c-line-soft);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.models__table thead th {
+  background: var(--c-ink-deep);
+  font-weight: 600;
+  color: var(--c-text-2);
+  white-space: nowrap;
+}
+
+.models__table tbody tr:last-child th,
+.models__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.models__table .num {
+  text-align: right;
+}
+
+.models__table tbody th {
+  font-weight: 400;
+}
+
+.models__sort {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.models__sort:focus-visible {
+  outline: 2px solid var(--c-predicted);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.models__arrow {
+  font-size: 10px;
+  color: var(--c-muted);
+}
+
+.models__name {
+  display: block;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.models__family {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-muted);
+}
+
+.models__std {
+  color: var(--c-muted);
+  font-size: var(--fs-xs);
+}
+
+.models__row--selected th,
+.models__row--selected td {
+  background: rgba(63, 208, 224, 0.1);
+}
+
+.models__row--selected th {
+  box-shadow: inset 3px 0 0 var(--c-predicted);
+}
+
+.tag--selected {
+  margin-left: 0;
+  color: var(--c-ink-deep);
+  background: var(--c-predicted);
+}
+
+.models__foot {
+  margin-top: 10px;
+}
+
+.models__note {
+  font-size: var(--fs-xs);
+  color: var(--c-text-2);
+  margin: 4px 0;
+}
+
+.models__chart {
+  margin-top: 14px;
+}
+
+.models__notes {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: var(--fs-xs);
+  color: var(--c-muted);
+}
+
+.modelplot__grid {
+  stroke: var(--c-line-soft);
+  stroke-width: 1;
+}
+
+.modelplot__whisker {
+  stroke: #8fa3c7;
+  stroke-width: 2;
+}
+
+.modelplot__dot {
+  fill: #8fa3c7;
+}
+
+.modelplot__row--selected .modelplot__whisker {
+  stroke: var(--c-predicted);
+}
+
+.modelplot__row--selected .modelplot__dot {
+  fill: var(--c-predicted);
+}
+
+.modelplot__row--selected .chart__label {
+  fill: var(--c-predicted);
+  font-weight: 600;
+}
+
+/* keep the dot plot at a readable size instead of scaling with the full column width */
+.models__chart .modelplot {
+  max-width: 760px;
+}

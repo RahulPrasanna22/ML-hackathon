@@ -1,0 +1,7 @@
+# run at 2026-11-18 16:38:51
+## GET /health -> HTTP 200
+{'status': 'ok', 'model_name': 'XGBoost (tuned) + HMM/Viterbi', 'hmm_enabled': True, 'evaluation_partition': 'evaluator_test', 'evaluation_partition_is_fallback': False, 'num_evaluation_trips': 10}
+## GET /evaluation/trips -> HTTP 200
+partition evaluator_test | trips ['00000015', '00000017', '00000023', '00000030', '00000049', '00000059', '00000067', '00000073', '00000087', '00000094']
+## GET /models/comparison -> HTTP 200
+models ['logreg', 'gaussian_nb', 'random_forest', 'extra_trees', 'hist_gb', 'lightgbm', 'xgboost*', 'mlp'] | TRAIN partition, 5-fold GroupKFold cross-validation grouped by trip (80 trips)

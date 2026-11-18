@@ -1,0 +1,13 @@
+# command (in frontend/): npx vite build
+# run at 2026-11-18 16:38:36
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 81 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.81 kB │ gzip:   0.44 kB
+dist/assets/index-BVqT7Bpv.css   33.09 kB │ gzip:  10.66 kB
+dist/assets/index-CzqFE1Yk.js   432.37 kB │ gzip: 131.30 kB
+
+✓ built in 335ms
+# exit code: 0

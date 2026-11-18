@@ -1,0 +1,201 @@
+== 05
+fold 0: top1=0.8851 logloss=0.1299
+fold 1: top1=0.9291 logloss=0.0663
+fold 2: top1=0.9154 logloss=0.0681
+fold 3: top1=0.9160 logloss=0.0748
+fold 4: top1=0.9217 logloss=0.0886
+                                                           0               1
+variant                  untuned (defaults from MODEL_SPECS)  tuned (Optuna)
+cv_top1_accuracy                                    0.912724        0.913458
+cv_top1_std                                         0.013548        0.014993
+cv_cand_macro_f1                                    0.946756        0.946802
+cv_log_loss                                         0.068121        0.085555
+cv_route_continuity                                 0.822283        0.817565
+st_top1_accuracy                                    0.898225        0.892641
+st_cand_macro_f1                                    0.939334        0.936705
+st_log_loss                                         0.070371        0.091188
+st_route_continuity                                 0.838683        0.838434
+fit_all_s                                          19.174937       63.217385
+st_inference_ms_per_obs                             0.006942        0.024709
+bundle written to C:\Users\Raghav\Downloads\ML Hackathon\artifacts\final
+== 06
+tuning trips: [np.str_('00000006'), np.str_('00000008'), np.str_('00000012'), np.str_('00000018'), np.str_('00000019'), np.str_('00000033'), np.str_('00000035'), np.str_('00000042'), np.str_('00000043'), np.str_('00000045'), np.str_('00000046'), np.str_('00000054'), np.str_('00000062'), np.str_('00000066'), np.str_('00000070'), np.str_('00000075'), np.str_('00000079'), np.str_('00000080'), np.str_('00000083'), np.str_('00000086'), np.str_('00000088'), np.str_('00000093'), np.str_('00000096'), np.str_('00000099')]
+classifier-only acc=0.9042 | default HMM acc=0.9206 (7.8s)
+[I 2026-11-18 14:41:40,912] A new study created in RDB with name: pathsnap_hmm
+[I 2026-11-18 14:41:47,004] Trial 0 finished with value: 0.9205956628233692 and parameters: {'beta': 10.0, 'emission_weight': 1.0, 'sigma': 0.0, 'same_arc_tol': 15.0, 'break_penalty': 50.0, 'reverse_penalty': 0.0}. Best is trial 0 with value: 0.9205956628233692.
+[I 2026-11-18 14:41:53,468] Trial 1 finished with value: 0.9205521687527702 and parameters: {'beta': 5.6115164153345045, 'emission_weight': 2.62516606324193, 'sigma': 0.0, 'same_arc_tol': 26.252932081698184, 'break_penalty': 45.918988705873275, 'reverse_penalty': 7.080725777960454}. Best is trial 0 with value: 0.9205956628233692.
+[I 2026-11-18 14:41:59,854] Trial 2 finished with value: 0.9234471956012279 and parameters: {'beta': 1.0994335574766196, 'emission_weight': 2.7652378632447703, 'sigma': 0.0, 'same_arc_tol': 16.693180085702657, 'break_penalty': 24.602080610141602, 'reverse_penalty': 2.9122914019804194}. Best is trial 2 with value: 0.9234471956012279.
+[I 2026-11-18 14:42:06,416] Trial 3 finished with value: 0.9241320710265549 and parameters: {'beta': 16.73808578875213, 'emission_weight': 0.29180149047462245, 'sigma': 20.0, 'same_arc_tol': 16.398564275581123, 'break_penalty': 44.46862319918232, 'reverse_penalty': 0.46450412719997725}. Best is trial 3 with value: 0.9241320710265549.
+[I 2026-11-18 14:42:13,169] Trial 4 finished with value: 0.8727778721946673 and parameters: {'beta': 16.40928673064792, 'emission_weight': 0.3173817328543002, 'sigma': 10.0, 'same_arc_tol': 4.734819192178748, 'break_penalty': 62.39536949187828, 'reverse_penalty': 4.4015249373960135}. Best is trial 3 with value: 0.9241320710265549.
+[I 2026-11-18 14:42:20,564] Trial 5 finished with value: 0.9197305994412348 and parameters: {'beta': 1.7541893487450793, 'emission_weight': 0.7645453149298415, 'sigma': 5.0, 'same_arc_tol': 16.561904592978703, 'break_penalty': 37.56926249576085, 'reverse_penalty': 1.8485445552552704}. Best is trial 3 with value: 0.9241320710265549.
+[I 2026-11-18 14:42:26,948] Trial 6 finished with value: 0.9073067521906446 and parameters: {'beta': 86.9299151113955, 'emission_weight': 1.6317624457583133, 'sigma': 0.0, 'same_arc_tol': 7.487520147736065, 'break_penalty': 5.907814282530528, 'reverse_penalty': 3.2533033076326436}. Best is trial 3 with value: 0.9241320710265549.
+[I 2026-11-18 14:42:33,420] Trial 7 finished with value: 0.9307002621552204 and parameters: {'beta': 5.9890036722543, 'emission_weight': 0.41702416368727124, 'sigma': 0.0, 'same_arc_tol': 24.46151546111311, 'break_penalty': 6.58270825915931, 'reverse_penalty': 9.868869366005173}. Best is trial 7 with value: 0.9307002621552204.
+[I 2026-11-18 14:42:39,979] Trial 8 finished with value: 0.931520075162469 and parameters: {'beta': 3.381099018394439, 'emission_weight': 0.24312082665146598, 'sigma': 0.0, 'same_arc_tol': 24.056012141915694, 'break_penalty': 14.231077270851735, 'reverse_penalty': 3.989989494458281}. Best is trial 8 with value: 0.931520075162469.
+[I 2026-11-18 14:42:46,056] Trial 9 finished with value: 0.8301688934378587 and parameters: {'beta': 1.1113017028200134, 'emission_weight': 0.2176231151599891, 'sigma': 0.0, 'same_arc_tol': 6.315908020004233, 'break_penalty': 189.62657797189507, 'reverse_penalty': 2.662915188594591}. Best is trial 8 with value: 0.931520075162469.
+[I 2026-11-18 14:42:52,548] Trial 10 finished with value: 0.9234469275232019 and parameters: {'beta': 64.49091535673587, 'emission_weight': 0.4810593959450252, 'sigma': 0.0, 'same_arc_tol': 20.51404184957626, 'break_penalty': 65.74357545705126, 'reverse_penalty': 8.314233791587434}. Best is trial 8 with value: 0.931520075162469.
+[I 2026-11-18 14:42:58,652] Trial 11 finished with value: 0.9252477805870303 and parameters: {'beta': 2.1539733864117117, 'emission_weight': 0.22013313413870667, 'sigma': 0.0, 'same_arc_tol': 24.59596484425213, 'break_penalty': 5.589165594852189, 'reverse_penalty': 2.203961234457167}. Best is trial 8 with value: 0.931520075162469.
+[I 2026-11-18 14:43:05,129] Trial 12 finished with value: 0.9262628779473685 and parameters: {'beta': 2.3972776908832056, 'emission_weight': 0.6692652648663019, 'sigma': 0.0, 'same_arc_tol': 20.225083765937434, 'break_penalty': 6.123091336508877, 'reverse_penalty': 7.004029026622612}. Best is trial 8 with value: 0.931520075162469.
+[I 2026-11-18 14:43:11,583] Trial 13 finished with value: 0.9318441230195087 and parameters: {'beta': 12.285277634358197, 'emission_weight': 0.25855375552920606, 'sigma': 0.0, 'same_arc_tol': 25.182358695588285, 'break_penalty': 11.375278819391017, 'reverse_penalty': 4.023257305962533}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:17,850] Trial 14 finished with value: 0.9298332007406503 and parameters: {'beta': 8.757265424406627, 'emission_weight': 0.2435642450248498, 'sigma': 0.0, 'same_arc_tol': 25.414201503130926, 'break_penalty': 6.267640101470379, 'reverse_penalty': 2.693354809579918}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:24,278] Trial 15 finished with value: 0.9272686271635954 and parameters: {'beta': 15.806124774476132, 'emission_weight': 0.28202204964269023, 'sigma': 0.0, 'same_arc_tol': 17.751041351938568, 'break_penalty': 10.282239747633225, 'reverse_penalty': 3.1814475749464366}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:30,817] Trial 16 finished with value: 0.9287108364370713 and parameters: {'beta': 1.2458853915003432, 'emission_weight': 0.4157604550602512, 'sigma': 0.0, 'same_arc_tol': 26.0788999580984, 'break_penalty': 25.839981309620573, 'reverse_penalty': 3.3468451315088834}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:37,580] Trial 17 finished with value: 0.9285157324565226 and parameters: {'beta': 15.673013450187721, 'emission_weight': 0.2133179593871816, 'sigma': 10.0, 'same_arc_tol': 26.863657320444926, 'break_penalty': 6.4929429933599305, 'reverse_penalty': 5.777255171769514}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:44,230] Trial 18 finished with value: 0.9303515976297755 and parameters: {'beta': 5.4742265728491, 'emission_weight': 0.2205405636157605, 'sigma': 0.0, 'same_arc_tol': 24.52425719923895, 'break_penalty': 26.86983132122031, 'reverse_penalty': 3.467020841669892}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:50,904] Trial 19 finished with value: 0.9254952160624684 and parameters: {'beta': 17.929036928364127, 'emission_weight': 0.37371072231694874, 'sigma': 20.0, 'same_arc_tol': 28.285069330683612, 'break_penalty': 6.102399331374488, 'reverse_penalty': 3.7667265918761847}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:43:57,299] Trial 20 finished with value: 0.9232346931630303 and parameters: {'beta': 4.9464064827569345, 'emission_weight': 0.36802894609203657, 'sigma': 0.0, 'same_arc_tol': 19.23397057423903, 'break_penalty': 10.457148917617507, 'reverse_penalty': 1.7788256733020633}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:44:03,783] Trial 21 finished with value: 0.9290281327188618 and parameters: {'beta': 2.380534812752366, 'emission_weight': 0.2420395744545622, 'sigma': 0.0, 'same_arc_tol': 22.199995039401966, 'break_penalty': 16.068178184788785, 'reverse_penalty': 6.558550251360693}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:44:10,306] Trial 22 finished with value: 0.9271274495854295 and parameters: {'beta': 6.239466842123061, 'emission_weight': 0.518533174332854, 'sigma': 0.0, 'same_arc_tol': 15.378739820804633, 'break_penalty': 9.776334952522506, 'reverse_penalty': 6.280025601712316}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:44:17,032] Trial 23 finished with value: 0.9282556704209193 and parameters: {'beta': 3.1795023379734237, 'emission_weight': 0.4076513861199588, 'sigma': 0.0, 'same_arc_tol': 25.035427586766932, 'break_penalty': 7.064238508410371, 'reverse_penalty': 9.706718930520337}. Best is trial 13 with value: 0.9318441230195087.
+[I 2026-11-18 14:44:23,682] Trial 24 finished with value: 0.9329591435335519 and parameters: {'beta': 26.890085338489577, 'emission_weight': 0.2152673277390465, 'sigma': 0.0, 'same_arc_tol': 24.686179238468767, 'break_penalty': 23.168400851390928, 'reverse_penalty': 8.992284513252239}. Best is trial 24 with value: 0.9329591435335519.
+[I 2026-11-18 14:44:30,680] Trial 25 finished with value: 0.9299941802386487 and parameters: {'beta': 52.449578215564976, 'emission_weight': 0.20469708417542273, 'sigma': 0.0, 'same_arc_tol': 20.867124432628195, 'break_penalty': 21.912875055973483, 'reverse_penalty': 6.273452419890438}. Best is trial 24 with value: 0.9329591435335519.
+[I 2026-11-18 14:44:38,223] Trial 26 finished with value: 0.9256119379852263 and parameters: {'beta': 17.583277487901377, 'emission_weight': 0.48155795939485996, 'sigma': 0.0, 'same_arc_tol': 27.91307591856624, 'break_penalty': 13.676573407923929, 'reverse_penalty': 3.689121627204887}. Best is trial 24 with value: 0.9329591435335519.
+[I 2026-11-18 14:44:45,619] Trial 27 finished with value: 0.9281897475812503 and parameters: {'beta': 1.9908404251003442, 'emission_weight': 0.2773396522858382, 'sigma': 0.0, 'same_arc_tol': 25.413228465264577, 'break_penalty': 14.441268000508872, 'reverse_penalty': 2.225085372852038}. Best is trial 24 with value: 0.9329591435335519.
+[I 2026-11-18 14:44:52,258] Trial 28 finished with value: 0.9273438930290302 and parameters: {'beta': 34.288123244810144, 'emission_weight': 0.36615706151821853, 'sigma': 0.0, 'same_arc_tol': 27.258421553262465, 'break_penalty': 24.74983168871168, 'reverse_penalty': 5.8863728693560216}. Best is trial 24 with value: 0.9329591435335519.
+[I 2026-11-18 14:44:59,608] Trial 29 finished with value: 0.9348892977913993 and parameters: {'beta': 22.28306214923603, 'emission_weight': 0.21466451328493905, 'sigma': 0.0, 'same_arc_tol': 26.69913537320635, 'break_penalty': 26.80571913147971, 'reverse_penalty': 7.350270205342977}. Best is trial 29 with value: 0.9348892977913993.
+{
+  "tuning_trips": [
+    "00000006",
+    "00000008",
+    "00000012",
+    "00000018",
+    "00000019",
+    "00000033",
+    "00000035",
+    "00000042",
+    "00000043",
+    "00000045",
+    "00000046",
+    "00000054",
+    "00000062",
+    "00000066",
+    "00000070",
+    "00000075",
+    "00000079",
+    "00000080",
+    "00000083",
+    "00000086",
+    "00000088",
+    "00000093",
+    "00000096",
+    "00000099"
+  ],
+  "n_trials": 30,
+  "optimisation_seconds": 198.6814215183258,
+  "selection": "best TRAIN out-of-fold accuracy; student-test numbers are confirmation only",
+  "train_subset_classifier_only_acc": 0.904242059089505,
+  "train_subset_default_hmm_acc": 0.9205956628233692,
+  "train_subset_best_hmm_acc": 0.9348892977913993,
+  "student_test_default_hmm_acc": 0.9314993720119406,
+  "student_test_tuned_hmm_acc": 0.9353353695988289,
+  "student_test_decode_seconds": 2.0039966106414795,
+  "best_params": {
+    "beta": 22.28306214923603,
+    "emission_weight": 0.21466451328493905,
+    "sigma": 0.0,
+    "prob_floor": 1e-06,
+    "same_arc_tol": 26.69913537320635,
+    "vmax": 50.0,
+    "base_limit": 300.0,
+    "max_limit": 6000.0,
+    "gap_break_s": 600.0,
+    "break_penalty": 26.80571913147971,
+    "reverse_penalty": 7.350270205342977
+  }
+}
+hmm_params.json <- TRAIN-tuned parameters
+== 07
+00000000: A=0.5445 B=0.9541 C=0.9592 | routeF1 B=0.983 C=0.992 | 0.51s
+00000007: A=0.4771 B=0.9660 C=0.9948 | routeF1 B=0.987 C=0.993 | 0.25s
+00000009: A=0.5377 B=0.8980 C=0.9295 | routeF1 B=0.913 C=0.968 | 0.55s
+00000040: A=0.5295 B=0.9456 C=0.9496 | routeF1 B=0.990 C=0.998 | 0.65s
+00000052: A=0.7824 B=0.9885 C=1.0000 | routeF1 B=0.981 C=0.998 | 0.12s
+00000056: A=0.6963 B=0.9247 C=0.9646 | routeF1 B=0.935 C=0.981 | 1.15s
+00000065: A=0.7109 B=0.8841 C=0.8880 | routeF1 B=0.966 C=0.983 | 0.49s
+00000076: A=0.4132 B=0.9314 C=0.9751 | routeF1 B=0.936 C=0.982 | 1.06s
+00000077: A=0.3618 B=0.7297 C=0.7520 | routeF1 B=0.892 C=0.980 | 1.24s
+00000091: A=0.5664 B=0.9119 C=0.9405 | routeF1 B=0.962 C=0.984 | 0.46s
+{
+  "partition": "student_test",
+  "n_trips": 10,
+  "observation_weighted": {
+    "nearest_road": {
+      "accuracy": 0.5318371607515657,
+      "accuracy_undirected": 0.8912317327766179,
+      "macro_f1": 0.7238999614627168
+    },
+    "classifier_only": {
+      "accuracy": 0.8926409185803758,
+      "accuracy_undirected": 0.949634655532359,
+      "macro_f1": 0.9391142663404115
+    },
+    "classifier_hmm": {
+      "accuracy": 0.9155010438413361,
+      "accuracy_undirected": 0.9687369519832986,
+      "macro_f1": 0.9523022696871924
+    }
+  },
+  "trip_mean": {
+    "nearest_road": {
+      "accuracy": 0.5619898471587254,
+      "accuracy_undirected": 0.8785823681363288,
+      "macro_f1": 0.741805534589089,
+      "continuity": 0.4474404152350341,
+      "reachable_continuity": 0.8797182659515477,
+      "sequence_accuracy": 0.3225882592395687,
+      "route_precision_len": 0.5428971465088829,
+      "route_recall_len": 0.7987801504187289,
+      "route_f1_len": 0.64419573834251,
+      "route_jaccard_arcs": 0.4192273834757104,
+      "norm_edit_distance": 0.6774117407604314,
+      "edit_distance": 423.4,
+      "mean_deviation_m": 1.130524294666476,
+      "invalid_transitions_total": 3416,
+      "unreachable_transitions_total": 709
+    },
+    "classifier_only": {
+      "accuracy": 0.913402473367038,
+      "accuracy_undirected": 0.9515894146006637,
+      "macro_f1": 0.950895397838293,
+      "continuity": 0.8384339231986389,
+      "reachable_continuity": 0.9780708425584533,
+      "sequence_accuracy": 0.695645833705752,
+      "route_precision_len": 0.9348387765159035,
+      "route_recall_len": 0.9766832897387191,
+      "route_f1_len": 0.9545968147190964,
+      "route_jaccard_arcs": 0.8357107996646673,
+      "norm_edit_distance": 0.3043541662942481,
+      "edit_distance": 147.8,
+      "mean_deviation_m": 0.429866225966631,
+      "invalid_transitions_total": 749,
+      "unreachable_transitions_total": 146
+    },
+    "classifier_hmm": {
+      "accuracy": 0.9353353695988289,
+      "accuracy_undirected": 0.9682517107165243,
+      "macro_f1": 0.963614088391107,
+      "continuity": 0.8975232333114194,
+      "reachable_continuity": 0.9988457355207107,
+      "sequence_accuracy": 0.9238787856096187,
+      "route_precision_len": 0.9757671502284007,
+      "route_recall_len": 0.9965025333223417,
+      "route_f1_len": 0.9859509235060255,
+      "route_jaccard_arcs": 0.9456242988580904,
+      "norm_edit_distance": 0.07612121439038136,
+      "edit_distance": 25.5,
+      "mean_deviation_m": 0.26762306472922603,
+      "invalid_transitions_total": 356,
+      "unreachable_transitions_total": 3
+    }
+  },
+  "latency": {
+    "mean_s_per_trip": 0.6474568599951454,
+    "max_s_per_trip": 1.2390371999936178,
+    "mean_ms_per_obs": 0.40758229537518
+  },
+  "candidate_miss_rate_mean": 0.0016964706121218253,
+  "hmm_breaks_total": 0,
+  "hmm_route_unfilled_gaps_total": 3
+}
+== 08
+plots written to C:\Users\Raghav\Downloads\ML Hackathon\reports\figures
+== CHAIN DONE

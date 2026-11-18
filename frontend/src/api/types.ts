@@ -81,3 +81,32 @@ export interface EvaluationResult {
   foliumMapHtml: string | null;
   warnings: string[];
 }
+
+/** One classifier row of the recorded TRAIN cross-validation comparison (GET /models/comparison). */
+export interface ModelCvRow {
+  key: string;
+  name: string;
+  family: string | null;
+  cvTop1Accuracy: number | null;
+  cvTop1AccuracyStd: number | null;
+  cvMacroF1: number | null;
+  cvMacroF1Std: number | null;
+  cvLogLoss: number | null;
+  cvRouteContinuity: number | null;
+  trainFoldTop1Accuracy: number | null;
+  fitTimeSPerFold: number | null;
+  fitTimeSAllTrain: number | null;
+  inferenceMsPerObservation: number | null;
+  selected: boolean;
+}
+
+export interface ModelComparison {
+  evaluation: string;
+  source: string | null;
+  selectionMetric: string | null;
+  selectedModel: string | null;
+  models: ModelCvRow[];
+  baseline: ModelCvRow | null;
+  tunedFinal: Omit<ModelCvRow, 'key' | 'family' | 'cvMacroF1Std' | 'cvRouteContinuity' | 'trainFoldTop1Accuracy' | 'fitTimeSPerFold' | 'selected'> | null;
+  notes: string[];
+}

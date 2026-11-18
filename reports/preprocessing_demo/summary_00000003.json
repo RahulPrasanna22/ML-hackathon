@@ -1,0 +1,81 @@
+{
+  "trip_id": "00000003",
+  "partition": "train",
+  "raw": {
+    "n_fixes": 821,
+    "n_nodes": 9138,
+    "n_arcs": 18028,
+    "route_len": 79,
+    "dt_max_s": 2.0,
+    "frac_dt_1s": 0.9963414634146341
+  },
+  "validation": {
+    "n_obs": 821,
+    "n_nodes": 9138,
+    "n_arcs": 18028,
+    "track_nan": 0,
+    "track_coord_out_of_range": 0,
+    "track_zero_coords": 0,
+    "nodes_nan": 0,
+    "nodes_out_of_range": 0,
+    "arcs_invalid_node_ref": 0,
+    "arcs_self_loops": 0,
+    "arcs_duplicate": 6,
+    "t_non_increasing": 0,
+    "t_duplicate": 0,
+    "dt_median": 1.0,
+    "dt_max": 2.0,
+    "frac_dt_1s": 0.9963414634146341,
+    "n_gaps_gt_5s": 0,
+    "n_gaps_gt_30s": 0,
+    "duration_s": 823.0,
+    "route_len": 79,
+    "route_invalid_ids": 0,
+    "route_connected_frac": 1.0,
+    "route_repeated_consecutive": 0,
+    "route_unique_arcs": 79
+  },
+  "cleaning": {
+    "n_raw": 821,
+    "n_invalid_dropped": 0,
+    "n_duplicate_t_dropped": 0,
+    "n_clean": 821,
+    "n_speed_outliers": 0,
+    "n_heading_invalid": 0
+  },
+  "network": {
+    "crop_arcs": 17890,
+    "crop_nodes": 9077,
+    "n_nodes": 9138,
+    "n_arcs": 18028,
+    "isolated_nodes": 0,
+    "weak_components": 42,
+    "largest_weak_frac": 0.9438608010505581,
+    "strong_components": 167,
+    "largest_strong_frac": 0.9011818778726198,
+    "two_way_frac": 0.9097769392964155
+  },
+  "candidates": {
+    "rows": 9155,
+    "per_fix_median": 12.0,
+    "per_fix_max": 12
+  },
+  "features": {
+    "n_features": 28,
+    "rows": 9155,
+    "missing_values": 0
+  },
+  "labels": {
+    "median_dist_m": 4.459516113879592,
+    "reliable_frac": 1.0,
+    "candidate_miss_rate": 0.0024360535931789995,
+    "positive_rows": 819
+  },
+  "timings_ms": {
+    "load_ms": 11.2,
+    "preprocess_ms": 7.2,
+    "network_ms": 86.4,
+    "candidates_ms": 29.9,
+    "features_ms": 86.6
+  }
+}

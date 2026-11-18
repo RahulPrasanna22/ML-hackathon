@@ -1,0 +1,16 @@
+{
+ "detail": [
+  {
+   "type": "string_pattern_mismatch",
+   "loc": [
+    "body",
+    "trip_id"
+   ],
+   "msg": "String should match pattern '^[0-9A-Za-z_\\-]+$'",
+   "input": "../x",
+   "ctx": {
+    "pattern": "^[0-9A-Za-z_\\-]+$"
+   }
+  }
+ ]
+}

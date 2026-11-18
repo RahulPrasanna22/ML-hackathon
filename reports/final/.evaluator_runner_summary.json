@@ -1,0 +1,53 @@
+{
+  "partition": "evaluator_test",
+  "model": "XGBoost (tuned) + HMM/Viterbi",
+  "n_trips_requested": 10,
+  "n_trips_ok": 10,
+  "total_evaluation_runtime_s": 13.24,
+  "failures": [],
+  "classifier_hmm": {
+    "accuracy_fix_weighted": 0.9596421673274372,
+    "macro_f1_fix_weighted": 0.9770737057922272,
+    "top1_accuracy_trip_mean": 0.9629792833994507,
+    "macro_f1_trip_mean": 0.9793893810786832,
+    "route_continuity_trip_mean": 0.8644292508139989,
+    "network_reachable_continuity_trip_mean": 1.0,
+    "sequence_accuracy_trip_mean": 0.8929798146111351,
+    "route_f1_trip_mean": 0.9828644916300888,
+    "normalized_edit_distance_trip_mean": 0.10702018538886504,
+    "mean_deviation_m_trip_mean": 0.1669838576921008
+  },
+  "classifier_only": {
+    "accuracy_fix_weighted": 0.9165904239097286,
+    "macro_f1_fix_weighted": 0.9519858586264879,
+    "top1_accuracy_trip_mean": 0.93966421460607,
+    "macro_f1_trip_mean": 0.9659951870783807,
+    "route_continuity_trip_mean": 0.8268992229377445,
+    "network_reachable_continuity_trip_mean": 0.9831937802465435,
+    "sequence_accuracy_trip_mean": 0.7116012727607903,
+    "route_f1_trip_mean": 0.9268127312847765,
+    "normalized_edit_distance_trip_mean": 0.2883987272392097,
+    "mean_deviation_m_trip_mean": 0.26967786548262085
+  },
+  "nearest_road": {
+    "accuracy_fix_weighted": 0.5090983023279455,
+    "macro_f1_fix_weighted": 0.714014213953702,
+    "top1_accuracy_trip_mean": 0.5442554862613963,
+    "macro_f1_trip_mean": 0.7356522200259039,
+    "route_continuity_trip_mean": 0.46624419110265664,
+    "network_reachable_continuity_trip_mean": 0.9214713318644006,
+    "sequence_accuracy_trip_mean": 0.3072435373029068,
+    "route_f1_trip_mean": 0.6376652486566229,
+    "normalized_edit_distance_trip_mean": 0.6927564626970931,
+    "mean_deviation_m_trip_mean": 0.8548493928128037
+  },
+  "total_observations": 19674,
+  "timing": {
+    "inference_ms_mean": 848.367,
+    "inference_ms_max": 1534.72,
+    "evaluation_ms_mean": 393.464,
+    "round_trip_ms_max": 2217.9,
+    "hmm_ms_mean": 240.64899999999997
+  },
+  "server_rss_peak_mb": 555.85546875
+}

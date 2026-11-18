@@ -1,0 +1,82 @@
+{
+  "partition": "student_test",
+  "n_trips": 10,
+  "observation_weighted": {
+    "nearest_road": {
+      "accuracy": 0.5318371607515657,
+      "accuracy_undirected": 0.8912317327766179,
+      "macro_f1": 0.7238999614627168
+    },
+    "classifier_only": {
+      "accuracy": 0.8926409185803758,
+      "accuracy_undirected": 0.949634655532359,
+      "macro_f1": 0.9391142663404115
+    },
+    "classifier_hmm": {
+      "accuracy": 0.9155010438413361,
+      "accuracy_undirected": 0.9687369519832986,
+      "macro_f1": 0.9523022696871924
+    }
+  },
+  "trip_mean": {
+    "nearest_road": {
+      "accuracy": 0.5619898471587254,
+      "accuracy_undirected": 0.8785823681363288,
+      "macro_f1": 0.741805534589089,
+      "continuity": 0.4474404152350341,
+      "reachable_continuity": 0.8797182659515477,
+      "sequence_accuracy": 0.3225882592395687,
+      "route_precision_len": 0.5428971465088829,
+      "route_recall_len": 0.7987801504187289,
+      "route_f1_len": 0.64419573834251,
+      "route_jaccard_arcs": 0.4192273834757104,
+      "norm_edit_distance": 0.6774117407604314,
+      "edit_distance": 423.4,
+      "mean_deviation_m": 1.130524294666476,
+      "invalid_transitions_total": 3416,
+      "unreachable_transitions_total": 709
+    },
+    "classifier_only": {
+      "accuracy": 0.913402473367038,
+      "accuracy_undirected": 0.9515894146006637,
+      "macro_f1": 0.950895397838293,
+      "continuity": 0.8384339231986389,
+      "reachable_continuity": 0.9780708425584533,
+      "sequence_accuracy": 0.695645833705752,
+      "route_precision_len": 0.9348387765159035,
+      "route_recall_len": 0.9766832897387191,
+      "route_f1_len": 0.9545968147190964,
+      "route_jaccard_arcs": 0.8357107996646673,
+      "norm_edit_distance": 0.3043541662942481,
+      "edit_distance": 147.8,
+      "mean_deviation_m": 0.429866225966631,
+      "invalid_transitions_total": 749,
+      "unreachable_transitions_total": 146
+    },
+    "classifier_hmm": {
+      "accuracy": 0.9353353695988289,
+      "accuracy_undirected": 0.9682517107165243,
+      "macro_f1": 0.963614088391107,
+      "continuity": 0.8975232333114194,
+      "reachable_continuity": 0.9988457355207107,
+      "sequence_accuracy": 0.9238787856096187,
+      "route_precision_len": 0.9757671502284007,
+      "route_recall_len": 0.9965025333223417,
+      "route_f1_len": 0.9859509235060255,
+      "route_jaccard_arcs": 0.9456242988580904,
+      "norm_edit_distance": 0.07612121439038136,
+      "edit_distance": 25.5,
+      "mean_deviation_m": 0.26762306472922603,
+      "invalid_transitions_total": 356,
+      "unreachable_transitions_total": 3
+    }
+  },
+  "latency": {
+    "mean_s_per_trip": 0.6474568599951454,
+    "max_s_per_trip": 1.2390371999936178,
+    "mean_ms_per_obs": 0.40758229537518
+  },
+  "candidate_miss_rate_mean": 0.0016964706121218253,
+  "hmm_breaks_total": 0,
+  "hmm_route_unfilled_gaps_total": 3
+}

@@ -1,0 +1,56 @@
+{
+  "partition": "evaluator_test",
+  "n_trips": 10,
+  "n_ok": 10,
+  "total_observations": 19674,
+  "failures": [],
+  "classifier_hmm": {
+    "accuracy_fix_weighted": 0.9596,
+    "macro_f1_fix_weighted": 0.9771,
+    "top1_accuracy_trip_mean": 0.963,
+    "macro_f1_trip_mean": 0.9794,
+    "route_continuity_trip_mean": 0.8644,
+    "network_reachable_continuity_trip_mean": 1.0,
+    "sequence_accuracy_trip_mean": 0.893,
+    "route_f1_trip_mean": 0.9829,
+    "normalized_edit_distance_trip_mean": 0.107,
+    "mean_deviation_m_trip_mean": 0.167,
+    "unreachable_transitions_total": 0
+  },
+  "classifier_only": {
+    "accuracy_fix_weighted": 0.9166,
+    "macro_f1_fix_weighted": 0.952,
+    "top1_accuracy_trip_mean": 0.9397,
+    "macro_f1_trip_mean": 0.966,
+    "route_continuity_trip_mean": 0.8269,
+    "network_reachable_continuity_trip_mean": 0.9832,
+    "sequence_accuracy_trip_mean": 0.7116,
+    "route_f1_trip_mean": 0.9268,
+    "normalized_edit_distance_trip_mean": 0.2884,
+    "mean_deviation_m_trip_mean": 0.2697,
+    "unreachable_transitions_total": 67
+  },
+  "nearest_road": {
+    "accuracy_fix_weighted": 0.5091,
+    "macro_f1_fix_weighted": 0.714,
+    "top1_accuracy_trip_mean": 0.5443,
+    "macro_f1_trip_mean": 0.7357,
+    "route_continuity_trip_mean": 0.4662,
+    "network_reachable_continuity_trip_mean": 0.9215,
+    "sequence_accuracy_trip_mean": 0.3072,
+    "route_f1_trip_mean": 0.6377,
+    "normalized_edit_distance_trip_mean": 0.6928,
+    "mean_deviation_m_trip_mean": 0.8548,
+    "unreachable_transitions_total": 381
+  },
+  "timing_ms": {
+    "inference_mean": 792,
+    "inference_max": 1438,
+    "hmm_mean": 245,
+    "evaluation_mean": 350,
+    "round_trip_mean": 1180,
+    "round_trip_max": 2004
+  },
+  "server_rss_peak_mb": 666,
+  "candidate_miss_rate_mean": 0.0022
+}

@@ -3,8 +3,8 @@
  * UI components never call fetch directly.
  */
 import { ApiError, ValidationError } from './errors';
-import type { EvaluationResult, HealthStatus, TripList } from './types';
-import { parseEvaluation, parseHealth, parseTripList } from './validate';
+import type { EvaluationResult, HealthStatus, ModelComparison, TripList } from './types';
+import { parseEvaluation, parseHealth, parseModelComparison, parseTripList } from './validate';
 
 export interface ClientOptions {
   timeoutMs: number;
@@ -149,6 +149,11 @@ export class PathSnapClient {
 
   listTrips(signal?: AbortSignal): Promise<TripList> {
     return this.request('/evaluation/trips', { timeoutMs: this.opts.timeoutMs, signal }, parseTripList);
+  }
+
+  /** GET /models/comparison: recorded TRAIN cross-validation results of the candidate classifiers. */
+  getModelComparison(signal?: AbortSignal): Promise<ModelComparison> {
+    return this.request('/models/comparison', { timeoutMs: this.opts.timeoutMs, signal }, parseModelComparison);
   }
 
   getEvaluation(evaluationId: string, signal?: AbortSignal, timeoutMs = this.opts.timeoutMs): Promise<EvaluationResult> {

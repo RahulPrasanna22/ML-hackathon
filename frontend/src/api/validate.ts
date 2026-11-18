@@ -15,6 +15,8 @@ import type {
   HmmInfo,
   LonLat,
   MetricMap,
+  ModelComparison,
+  ModelCvRow,
   Observation,
   RouteGeometry,
   RouteSegment,
@@ -277,5 +279,57 @@ export function parseEvaluation(raw: unknown): EvaluationResult {
     foliumMapUrl: optString(raw, 'folium_map_url', p),
     foliumMapHtml: optString(raw, 'folium_map_html', p),
     warnings,
+  };
+}
+
+/* -------------------------------------------------------- model comparison */
+
+function parseModelRow(raw: unknown, path: string): ModelCvRow {
+  if (!isObj(raw)) throw new ValidationError(path, 'expected a model object');
+  return {
+    key: toId(raw.key, `${path}.key`),
+    name: optString(raw, 'name', path) ?? String(raw.key),
+    family: optString(raw, 'family', path),
+    cvTop1Accuracy: optNumber(raw, 'cv_top1_accuracy', path),
+    cvTop1AccuracyStd: optNumber(raw, 'cv_top1_accuracy_std', path),
+    cvMacroF1: optNumber(raw, 'cv_macro_f1', path),
+    cvMacroF1Std: optNumber(raw, 'cv_macro_f1_std', path),
+    cvLogLoss: optNumber(raw, 'cv_log_loss', path),
+    cvRouteContinuity: optNumber(raw, 'cv_route_continuity', path),
+    trainFoldTop1Accuracy: optNumber(raw, 'train_fold_top1_accuracy', path),
+    fitTimeSPerFold: optNumber(raw, 'fit_time_s_per_fold', path),
+    fitTimeSAllTrain: optNumber(raw, 'fit_time_s_all_train', path),
+    inferenceMsPerObservation: optNumber(raw, 'inference_ms_per_observation', path),
+    selected: optBool(raw, 'selected', path) ?? false,
+  };
+}
+
+export function parseModelComparison(raw: unknown): ModelComparison {
+  if (!isObj(raw)) throw new ValidationError('models', 'expected a JSON object');
+  const arr = optArray(raw, 'models', 'models');
+  if (arr === null) throw new ValidationError('models', 'missing "models" array');
+  const evaluation = optString(raw, 'evaluation', 'models');
+  if (!evaluation) throw new ValidationError('models.evaluation', 'missing description of the evaluation protocol');
+  const baseline = optObject(raw, 'baseline', 'models');
+  const tuned = optObject(raw, 'tuned_final', 'models');
+  return {
+    evaluation,
+    source: optString(raw, 'source', 'models'),
+    selectionMetric: optString(raw, 'selection_metric', 'models'),
+    selectedModel: optString(raw, 'selected_model', 'models'),
+    models: arr.map((m, i) => parseModelRow(m, `models.models[${i}]`)),
+    baseline: baseline ? parseModelRow(baseline, 'models.baseline') : null,
+    tunedFinal: tuned
+      ? {
+          name: optString(tuned, 'name', 'models.tuned_final') ?? 'Tuned final model',
+          cvTop1Accuracy: optNumber(tuned, 'cv_top1_accuracy', 'models.tuned_final'),
+          cvTop1AccuracyStd: optNumber(tuned, 'cv_top1_accuracy_std', 'models.tuned_final'),
+          cvMacroF1: optNumber(tuned, 'cv_macro_f1', 'models.tuned_final'),
+          cvLogLoss: optNumber(tuned, 'cv_log_loss', 'models.tuned_final'),
+          fitTimeSAllTrain: optNumber(tuned, 'fit_time_s_all_train', 'models.tuned_final'),
+          inferenceMsPerObservation: optNumber(tuned, 'inference_ms_per_observation', 'models.tuned_final'),
+        }
+      : null,
+    notes: (optArray(raw, 'notes', 'models') ?? []).filter((n): n is string => typeof n === 'string'),
   };
 }

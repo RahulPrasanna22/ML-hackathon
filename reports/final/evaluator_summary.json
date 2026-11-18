@@ -1,0 +1,206 @@
+{
+  "partition": "evaluator_test",
+  "dataset_folder": "evaluator_test/ (10 trip folders, no scoring scripts or documentation shipped)",
+  "scoring_protocol": "server-side scoring by the PathSnap API after prediction (hackathon guidelines: the API computes accuracy using its internal reference data)",
+  "model": "XGBoost (tuned) + HMM/Viterbi",
+  "frozen_bundle_sha256_prefix": {
+    "model.joblib": "7ebb199fc9b56a3d",
+    "hmm_params.json": "6f5a567b6720a998"
+  },
+  "trips_in_folder": 10,
+  "trips_valid": 10,
+  "trips_evaluated": 10,
+  "trips_successful": 10,
+  "trips_failed": 0,
+  "failures": [],
+  "total_gps_observations": 19674,
+  "total_evaluation_runtime_s": 13.24,
+  "aggregation": {
+    "observation_weighted": "sum over trips of metric x GPS fixes / total GPS fixes (for top-1 this is pooled accuracy over all fixes)",
+    "macro_average": "unweighted mean over the 10 trips"
+  },
+  "metrics": {
+    "xgboost_hmm": {
+      "top1_accuracy": {
+        "observation_weighted": 0.959642,
+        "macro_average": 0.962979
+      },
+      "precision": {
+        "observation_weighted": 0.976767,
+        "macro_average": 0.978954
+      },
+      "recall": {
+        "observation_weighted": 0.977382,
+        "macro_average": 0.979827
+      },
+      "macro_f1": {
+        "observation_weighted": 0.977074,
+        "macro_average": 0.979389
+      },
+      "log_loss": {
+        "observation_weighted": 0.071379,
+        "macro_average": 0.05068
+      },
+      "route_continuity": {
+        "observation_weighted": 0.863657,
+        "macro_average": 0.864429
+      },
+      "network_reachable_continuity": {
+        "observation_weighted": 1.0,
+        "macro_average": 1.0
+      },
+      "sequence_accuracy": {
+        "observation_weighted": 0.828132,
+        "macro_average": 0.89298
+      },
+      "route_precision": {
+        "observation_weighted": 0.935789,
+        "macro_average": 0.970247
+      },
+      "route_recall": {
+        "observation_weighted": 0.995481,
+        "macro_average": 0.997039
+      },
+      "route_f1": {
+        "observation_weighted": 0.963218,
+        "macro_average": 0.982864
+      },
+      "candidate_miss_rate": {
+        "observation_weighted": 0.001525,
+        "macro_average": 0.00216
+      }
+    },
+    "xgboost_only": {
+      "top1_accuracy": {
+        "observation_weighted": 0.91659,
+        "macro_average": 0.939664
+      },
+      "precision": {
+        "observation_weighted": 0.9517,
+        "macro_average": 0.965577
+      },
+      "recall": {
+        "observation_weighted": 0.952274,
+        "macro_average": 0.966416
+      },
+      "macro_f1": {
+        "observation_weighted": 0.951986,
+        "macro_average": 0.965995
+      },
+      "log_loss": {
+        "observation_weighted": 0.071379,
+        "macro_average": 0.05068
+      },
+      "route_continuity": {
+        "observation_weighted": 0.850383,
+        "macro_average": 0.826899
+      },
+      "network_reachable_continuity": {
+        "observation_weighted": 0.990206,
+        "macro_average": 0.983194
+      },
+      "sequence_accuracy": {
+        "observation_weighted": 0.560927,
+        "macro_average": 0.711601
+      },
+      "route_precision": {
+        "observation_weighted": 0.786322,
+        "macro_average": 0.905671
+      },
+      "route_recall": {
+        "observation_weighted": 0.979286,
+        "macro_average": 0.968243
+      },
+      "route_f1": {
+        "observation_weighted": 0.847889,
+        "macro_average": 0.926813
+      },
+      "candidate_miss_rate": {
+        "observation_weighted": 0.001525,
+        "macro_average": 0.00216
+      }
+    },
+    "nearest_road": {
+      "top1_accuracy": {
+        "observation_weighted": 0.509098,
+        "macro_average": 0.544255
+      },
+      "precision": {
+        "observation_weighted": 0.713887,
+        "macro_average": 0.735453
+      },
+      "recall": {
+        "observation_weighted": 0.714142,
+        "macro_average": 0.735853
+      },
+      "macro_f1": {
+        "observation_weighted": 0.714014,
+        "macro_average": 0.735652
+      },
+      "log_loss": null,
+      "route_continuity": {
+        "observation_weighted": 0.513614,
+        "macro_average": 0.466244
+      },
+      "network_reachable_continuity": {
+        "observation_weighted": 0.951432,
+        "macro_average": 0.921471
+      },
+      "sequence_accuracy": {
+        "observation_weighted": 0.250381,
+        "macro_average": 0.307244
+      },
+      "route_precision": {
+        "observation_weighted": 0.527761,
+        "macro_average": 0.549476
+      },
+      "route_recall": {
+        "observation_weighted": 0.797298,
+        "macro_average": 0.7748
+      },
+      "route_f1": {
+        "observation_weighted": 0.625119,
+        "macro_average": 0.637665
+      },
+      "candidate_miss_rate": {
+        "observation_weighted": 0.001525,
+        "macro_average": 0.00216
+      }
+    }
+  },
+  "timing_ms": {
+    "inference_mean": 848.4,
+    "inference_min": 238.7,
+    "inference_max": 1534.7,
+    "hmm_mean": 240.6,
+    "server_total_mean": 1241.8,
+    "round_trip_mean": 1299.8,
+    "round_trip_total": 12997.5
+  },
+  "fastest_trip": {
+    "trip_id": "00000067",
+    "round_trip_ms": 529.2,
+    "gps_fixes": 916
+  },
+  "slowest_trip": {
+    "trip_id": "00000017",
+    "round_trip_ms": 2217.9,
+    "gps_fixes": 1346
+  },
+  "best_trip_by_accuracy": {
+    "trip_id": "00000049",
+    "top1_accuracy": 0.9958364875094625
+  },
+  "worst_trip_by_accuracy": {
+    "trip_id": "00000030",
+    "top1_accuracy": 0.8883792048929664
+  },
+  "hmm_status_counts": {
+    "ok": 10
+  },
+  "hmm_improved_accuracy_on_trips": 10,
+  "trips_where_hmm_lowered_strict_continuity": [
+    "00000015"
+  ],
+  "reproducibility": "identical metrics to the first official run (reports/evaluator/evaluator_results.csv): max abs difference 0.0 over 66 metric columns"
+}

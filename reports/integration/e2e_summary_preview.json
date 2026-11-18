@@ -1,0 +1,114 @@
+{
+  "ui": "http://localhost:4173",
+  "api": "http://localhost:8000",
+  "trip_buttons": 10,
+  "header": "PathSnap |  | Distributed Map Matching & Route Reconstruction | Laptop 1 API \u00b7 Connected | localhost:8000 \u00b7 17 ms | Connection",
+  "runs": [
+    {
+      "trip_id": "00000000",
+      "ui_seconds": 1.0,
+      "status": "Trip 00000000 evaluated in 817 ms (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 3932,
+      "api_top1_pct": 95.9,
+      "ui_top1_pct": 95.9,
+      "api_macro_f1_pct": 97.4,
+      "ui_macro_f1_pct": 97.4,
+      "api_route_segments": 205,
+      "ui_route_segments": 205,
+      "screenshot": "reports\\integration\\ui_trip_00000000.png"
+    },
+    {
+      "trip_id": "00000056",
+      "ui_seconds": 4.1,
+      "status": "Trip 00000056 evaluated in 3.86 s (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 18808,
+      "api_top1_pct": 96.5,
+      "ui_top1_pct": 96.5,
+      "api_macro_f1_pct": 98.2,
+      "ui_macro_f1_pct": 98.2,
+      "api_route_segments": 1332,
+      "ui_route_segments": 1332,
+      "screenshot": "reports\\integration\\ui_trip_00000056.png"
+    },
+    {
+      "trip_id": "00000091",
+      "ui_seconds": 0.96,
+      "status": "Trip 00000091 evaluated in 558 ms (browser round trip).",
+      "model_in_response": "XGBoost (tuned) + HMM/Viterbi",
+      "drawn_vector_elements_or_pixels": 8017,
+      "api_top1_pct": 94.1,
+      "ui_top1_pct": 94.1,
+      "api_macro_f1_pct": 96.7,
+      "ui_macro_f1_pct": 96.7,
+      "api_route_segments": 235,
+      "ui_route_segments": 235,
+      "screenshot": "reports\\integration\\ui_trip_00000091.png"
+    }
+  ],
+  "checks": {
+    "trip_buttons_loaded": true,
+    "routes_drawn": true,
+    "top1_matches_api": true,
+    "macro_f1_matches_api": true,
+    "route_segments_match_api": true,
+    "history_lists_all_runs": true,
+    "no_console_errors": true,
+    "no_tile_errors": true
+  },
+  "api_calls": [
+    [
+      "GET",
+      "http://localhost:4173/?api=",
+      200
+    ],
+    [
+      "GET",
+      "/health",
+      200
+    ],
+    [
+      "GET",
+      "/evaluation/trips",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ],
+    [
+      "POST",
+      "/evaluation/run",
+      200
+    ]
+  ],
+  "history_trips_listed": [
+    "00000000",
+    "00000056",
+    "00000091"
+  ],
+  "console_errors": [],
+  "tile_requests": 53,
+  "tile_status_counts": {
+    "200": 53
+  },
+  "failed_requests": [
+    "https://tile.openstreetmap.org/11/1334/635.png",
+    "https://tile.openstreetmap.org/11/1334/636.png",
+    "https://tile.openstreetmap.org/11/1333/635.png",
+    "https://tile.openstreetmap.org/11/1335/635.png",
+    "https://tile.openstreetmap.org/11/1333/636.png",
+    "https://tile.openstreetmap.org/11/1335/636.png",
+    "https://tile.openstreetmap.org/11/1334/634.png",
+    "https://tile.openstreetmap.org/11/1334/637.png",
+    "https://tile.openstreetmap.org/11/1333/634.png",
+    "https://tile.openstreetmap.org/11/1335/634.png"
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "rss_start_mb": 77.9375,
+  "model_load_ms": 2056.987999996636,
+  "rss_after_load_mb": 313.36328125,
+  "pipeline_per_trip": [
+    {
+      "trip_id": "00000000",
+      "n_obs": 2503,
+      "n_candidates": 11379,
+      "wall_ms": 525.8239000104368,
+      "preprocess_network_ms": 170.90729996562004,
+      "candidates_features_ms": 134.42359998589382,
+      "classifier_ms": 44.324300019070506,
+      "viterbi_ms": 169.8569000000134,
+      "route_reconstruction_ms": 1.2320000096224248,
+      "total_ms": 520.7440999802202
+    },
+    {
+      "trip_id": "00000007",
+      "n_obs": 1354,
+      "n_candidates": 4854,
+      "wall_ms": 206.71880000736564,
+      "preprocess_network_ms": 29.701400024350733,
+      "candidates_features_ms": 63.164599996525794,
+      "classifier_ms": 18.23400001740083,
+      "viterbi_ms": 90.11019999161363,
+      "route_reconstruction_ms": 0.42150000808760524,
+      "total_ms": 201.6317000379786
+    },
+    {
+      "trip_id": "00000009",
+      "n_obs": 1049,
+      "n_candidates": 11031,
+      "wall_ms": 463.7074999627657,
+      "preprocess_network_ms": 62.21720000030473,
+      "candidates_features_ms": 152.7815000154078,
+      "classifier_ms": 51.88250000355765,
+      "viterbi_ms": 189.39529999624938,
+      "route_reconstruction_ms": 0.4637999809347093,
+      "total_ms": 456.74029999645427
+    },
+    {
+      "trip_id": "00000040",
+      "n_obs": 2995,
+      "n_candidates": 14806,
+      "wall_ms": 624.2845000233501,
+      "preprocess_network_ms": 168.62079995917156,
+      "candidates_features_ms": 171.97200004011393,
+      "classifier_ms": 55.97830004990101,
+      "viterbi_ms": 218.90020003775135,
+      "route_reconstruction_ms": 0.5981999565847218,
+      "total_ms": 616.0695000435226
+    },
+    {
+      "trip_id": "00000052",
+      "n_obs": 262,
+      "n_candidates": 2128,
+      "wall_ms": 111.33909999625757,
+      "preprocess_network_ms": 24.097799963783473,
+      "candidates_features_ms": 36.27600002801046,
+      "classifier_ms": 13.075899973046035,
+      "viterbi_ms": 32.40419999929145,
+      "route_reconstruction_ms": 0.1409000251442194,
+      "total_ms": 105.99479998927563
+    },
+    {
+      "trip_id": "00000056",
+      "n_obs": 3958,
+      "n_candidates": 34433,
+      "wall_ms": 1109.3984000035562,
+      "preprocess_network_ms": 186.74190004821867,
+      "candidates_features_ms": 374.1223000106402,
+      "classifier_ms": 115.12109998147935,
+      "viterbi_ms": 414.92199996719137,
+      "route_reconstruction_ms": 4.731900000479072,
+      "total_ms": 1095.6392000080086
+    },
+    {
+      "trip_id": "00000065",
+      "n_obs": 768,
+      "n_candidates": 7542,
+      "wall_ms": 380.93769998522475,
+      "preprocess_network_ms": 82.47299998765811,
+      "candidates_features_ms": 102.66269999556243,
+      "classifier_ms": 29.581999988295138,
+      "viterbi_ms": 158.76169997500256,
+      "route_reconstruction_ms": 0.20920002134516835,
+      "total_ms": 373.6885999678634
+    },
+    {
+      "trip_id": "00000076",
+      "n_obs": 1486,
+      "n_candidates": 15867,
+      "wall_ms": 1036.1236999742687,
+      "preprocess_network_ms": 323.74439999694005,
+      "candidates_features_ms": 239.8846999858506,
+      "classifier_ms": 55.580099986400455,
+      "viterbi_ms": 405.1714999950491,
+      "route_reconstruction_ms": 0.5621000309474766,
+      "total_ms": 1024.9427999951877
+    },
+    {
+      "trip_id": "00000077",
+      "n_obs": 3911,
+      "n_candidates": 36679,
+      "wall_ms": 1112.090599955991,
+      "preprocess_network_ms": 53.64440003177151,
+      "candidates_features_ms": 385.09949995204806,
+      "classifier_ms": 116.25640001147985,
+      "viterbi_ms": 534.3312000040896,
+      "route_reconstruction_ms": 0.8993000374175608,
+      "total_ms": 1090.2308000368066
+    },
+    {
+      "trip_id": "00000091",
+      "n_obs": 874,
+      "n_candidates": 8194,
+      "wall_ms": 370.3570999787189,
+      "preprocess_network_ms": 91.79089998360723,
+      "candidates_features_ms": 107.33540001092479,
+      "classifier_ms": 27.761199977248907,
+      "viterbi_ms": 136.59040001221,
+      "route_reconstruction_ms": 0.28450001263991,
+      "total_ms": 363.76239999663085
+    }
+  ],
+  "pipeline_mean_ms": 594.0781299897935,
+  "pipeline_max_ms": 1112.090599955991,
+  "hmm_mean_ms": 235.0443599978462,
+  "ms_per_observation": 0.3100616544831908,
+  "api_per_trip": [
+    {
+      "trip_id": "00000000",
+      "status": 200,
+      "response_ms": 793.7442000256851,
+      "payload_kb": 351.4453125,
+      "server_inference_ms": 573.25,
+      "server_evaluation_ms": 198.76
+    },
+    {
+      "trip_id": "00000007",
+      "status": 200,
+      "response_ms": 376.6293000080623,
+      "payload_kb": 173.6630859375,
+      "server_inference_ms": 268.84,
+      "server_evaluation_ms": 93.22
+    },
+    {
+      "trip_id": "00000009",
+      "status": 200,
+      "response_ms": 816.6701999725774,
+      "payload_kb": 400.9951171875,
+      "server_inference_ms": 509.53,
+      "server_evaluation_ms": 239.17
+    },
+    {
+      "trip_id": "00000040",
+      "status": 200,
+      "response_ms": 1178.925900021568,
+      "payload_kb": 444.232421875,
+      "server_inference_ms": 713.92,
+      "server_evaluation_ms": 387.64
+    },
+    {
+      "trip_id": "00000052",
+      "status": 200,
+      "response_ms": 155.72029998293146,
+      "payload_kb": 89.646484375,
+      "server_inference_ms": 112.05,
+      "server_evaluation_ms": 35.03
+    },
+    {
+      "trip_id": "00000056",
+      "status": 200,
+      "response_ms": 3585.723700001836,
+      "payload_kb": 902.8916015625,
+      "server_inference_ms": 1316.5,
+      "server_evaluation_ms": 2242.25
+    },
+    {
+      "trip_id": "00000065",
+      "status": 200,
+      "response_ms": 482.91150003205985,
+      "payload_kb": 248.62890625,
+      "server_inference_ms": 399.01,
+      "server_evaluation_ms": 69.89
+    },
+    {
+      "trip_id": "00000076",
+      "status": 200,
+      "response_ms": 1567.6627000211738,
+      "payload_kb": 660.7607421875,
+      "server_inference_ms": 1210.9,
+      "server_evaluation_ms": 251.82
+    },
+    {
+      "trip_id": "00000077",
+      "status": 200,
+      "response_ms": 1755.277800024487,
+      "payload_kb": 586.671875,
+      "server_inference_ms": 1214.61,
+      "server_evaluation_ms": 440.02
+    },
+    {
+      "trip_id": "00000091",
+      "status": 200,
+      "response_ms": 496.8007999705151,
+      "payload_kb": 243.677734375,
+      "server_inference_ms": 363.8,
+      "server_evaluation_ms": 120.53
+    }
+  ],
+  "api_mean_response_ms": 1121.0066400060896,
+  "api_max_response_ms": 3585.723700001836,
+  "api_mean_payload_kb": 410.261328125,
+  "rss_peak_mb": 616.21875,
+  "cpu": {
+    "logical_cores": 16,
+    "ram_gb": 15.8
+  }
+}

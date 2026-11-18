@@ -1,0 +1,12 @@
+# command (in frontend/): npx vitest run
+# run at 2026-11-18 16:38:18
+
+ RUN  v5.1.0 C:/Users/Raghav/Downloads/ML Hackathon/frontend
+
+
+ Test Files  5 passed (5)
+      Tests  61 passed (61)
+   Start at  16:38:23
+   Duration  8.54s (environment 59%, setup 23%, tests 12%, import 3%, transform 3%, worker 1%)
+
+# exit code: 0

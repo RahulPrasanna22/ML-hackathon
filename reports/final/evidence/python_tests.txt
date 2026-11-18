@@ -1,0 +1,15 @@
+# command: .venv/Scripts/python -m pytest tests -q -p no:cacheprovider
+# run at 2026-11-18 16:34:00
+........................................................                 [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\Raghav\Downloads\ML Hackathon\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_models_pipeline.py::test_every_model_trains_and_outputs_probabilities[mlp]
+  C:\Users\Raghav\Downloads\ML Hackathon\.venv\Lib\site-packages\sklearn\neural_network\_multilayer_perceptron.py:695: UserWarning: Got `batch_size` less than 1 or larger than sample size. It is going to be clipped
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+56 passed, 2 warnings in 32.93s
+# exit code: 0

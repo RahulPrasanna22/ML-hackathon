@@ -34,10 +34,20 @@ Ground-truth labels stay on Laptop 1. The UI only ever sends a trip ID and recei
 | Path | Contents | Status |
 |---|---|---|
 | `frontend/` | Laptop 2 evaluator UI (React 19, Vite, TypeScript, Leaflet, Vitest) | Implemented and tested |
-| `docs/API_CONTRACT.md` | Proposed REST/JSON contract between the laptops | Proposed, awaiting Laptop 1 confirmation |
+| `docs/API_CONTRACT.md` | REST/JSON contract between the laptops | Proposed by Laptop 2, confirmed and implemented by Laptop 1 (notes at the end) |
 | `docs/TWO_LAPTOP_SETUP.md` | Networking, CORS, firewall and demo runbook (PowerShell) | Done |
 | `docs/DEVELOPER_HANDOFF_LAPTOP_1.md` | Integration brief for the backend developer | Done |
-| *(Laptop 1 folders)* | Data processing, training, HMM, API | To be added by Laptop 1 |
+| `pathsnap/` | Laptop 1 Python package: parsing, validation, GPS cleaning, geodesy, road network, candidates, features, label alignment | Preprocessing done and tested |
+| `scripts/01_explore.py`, `scripts/02_build_dataset.py`, `scripts/demo_preprocessing.py` | EDA, dataset build, first-review demo | Done |
+| `tests/` | Python tests: parsing, preprocessing, candidates, features, HMM, models, leakage/integrity, API | 46 passing |
+| `reports/` | EDA report, statistics, figures, Folium map, preprocessing demo outputs | Done |
+| `docs/PREPROCESSING_REVIEW.md` | First-review document (data preprocessing) | Done |
+| `pathsnap/models.py`, `hmm.py`, `pipeline.py`, `evaluation.py`, `viz.py` | model zoo, HMM/Viterbi, inference pipeline, server-side evaluation, Folium maps | Done |
+| `scripts/03`–`09` | training + CV, Optuna, finalisation, decoder tuning, evaluation, plots, benchmark | Done |
+| `api/` | FastAPI backend (`api.main:app`) | Done |
+| `artifacts/final/` | final model bundle (model, feature schema, HMM parameters, manifest) | Done |
+| `integration/` | contract test (real API JSON → frontend validator), browser E2E test, captured fixtures | Done |
+| `reports/RESULTS.md` | model comparison, optimisation, HMM, held-out results, benchmarks, integration | Done |
 
 ### Dataset (not in the repository)
 
@@ -108,9 +118,94 @@ Automated tests use clearly separated mocked responses (`frontend/src/test/`). T
 | Component | Status |
 |---|---|
 | Evaluator UI (Laptop 2) | Implemented: 53 automated tests passing, production build passing |
-| API contract | Proposed in `docs/API_CONTRACT.md`, pending Laptop 1 agreement |
-| ML pipeline, HMM/Viterbi, FastAPI backend (Laptop 1) | In progress on Laptop 1, not yet in this repository |
-| End-to-end integration with the real backend | **Not yet done.** The UI has only been exercised against test mocks and a local stub. |
+| API contract | Confirmed and implemented; real responses pass the frontend validator (`integration/contract.test.ts`) |
+| Data preprocessing and feature engineering (Laptop 1) | Done, see [First Review: Data Preprocessing](#first-review-data-preprocessing) |
+| 8 models, Optuna, HMM/Viterbi, FastAPI backend (Laptop 1) | Done. Results in [`reports/RESULTS.md`](reports/RESULTS.md) (student-test, classifier + HMM: accuracy 0.9155, macro-F1 0.9523) |
+| End-to-end integration (real model) | Verified locally on one laptop: Edge → UI (dev and production build) → FastAPI → final model; all checks passed (`reports/integration/`). Two-laptop LAN run still to be done on the day |
+
+## First Review: Data Preprocessing
+
+Full write-up with statistics, before and after examples, and what is still pending:
+[`docs/PREPROCESSING_REVIEW.md`](docs/PREPROCESSING_REVIEW.md). Dataset exploration: [`reports/EDA.md`](reports/EDA.md).
+
+Pipeline (`pathsnap/`): parse `.track/.nodes/.arcs` → validate → clean GPS (invalid points, ordering, duplicate
+timestamps) → local metric projection, speed and heading → crop the road network, build the KD-tree spatial index and the directed graph →
+candidate arcs within 50 m (≤ 12 per fix) → 28 label-free features → TRAIN-only labels from the reference route
+(monotone alignment, joined after features).
+
+Demo commands (Windows PowerShell, from the repository root, dataset at `Student folder\Student folder\`):
+
+```powershell
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+
+# 1) single-trip walkthrough (~1 s), writes reports\preprocessing_demo\
+.venv\Scripts\python scripts\demo_preprocessing.py --data-root "Student folder\Student folder\train" --trip 00000003
+
+# 2) build features + labels for a small TRAIN sample (3 trips, ~3 s; full run: omit --limit)
+.venv\Scripts\python scripts\02_build_dataset.py --partitions train --limit 3
+
+# 3) preprocessing tests
+.venv\Scripts\python -m pytest tests\test_data_preprocessing.py tests\test_candidates_features.py -v
+
+# 4) (optional, ~3 min) dataset-wide EDA: statistics, figures and a Folium map
+.venv\Scripts\python scripts\01_explore.py
+```
+
+Visuals: `reports/preprocessing_demo/preprocessing_00000003.png`, `reports/figures/eda_*.png`, and the Folium map
+`reports/maps/eda_trip_00000003.html` (open it in a browser).
+
+## Laptop 1: ML pipeline and API
+
+### Pipeline
+
+| step | script | data used | output |
+|---|---|---|---|
+| EDA | `scripts/01_explore.py` | train, student_test | `reports/EDA.md`, figures, Folium map |
+| features + labels | `scripts/02_build_dataset.py` | train, student_test (separately) | `cache/` (git-ignored) |
+| 8 models, GroupKFold(5) by trip | `scripts/03_train_models.py` | **train** (CV); student_test only for reporting | `reports/experiments/model_comparison.csv`, `cv_folds.csv` |
+| Bayesian optimisation (Optuna TPE) | `scripts/04_bayes_opt.py --model xgboost` | **train only** | `reports/experiments/optuna_xgboost_*`, `artifacts/optuna/*.db` |
+| final model + OOF probabilities | `scripts/05_finalize_model.py --model xgboost` | **train**; student_test reported | `artifacts/final/` bundle |
+| HMM decoder tuning | `scripts/06_tune_decoder.py` | **train out-of-fold** probabilities only | `artifacts/final/hmm_params.json` |
+| held-out confirmation + maps | `scripts/07_evaluate_routes.py --maps` | student_test (confirmation only) | `reports/experiments/route_eval_*`, `reports/maps/match_*.html` |
+| plots | `scripts/08_make_plots.py` | saved results | `reports/figures/*.png` |
+| benchmark | `scripts/09_benchmark.py` | student_test | `reports/experiments/benchmark.json` |
+
+Everything above: `reproduce_all.bat`. The evaluator partition is never read by any of these scripts.
+
+### Final artifact bundle (`artifacts/final/`)
+
+`model.joblib` (classifier), `feature_schema.json` (28 feature names and order), `hmm_params.json` (decoder),
+`manifest.json` (algorithm, tuned hyperparameters, Optuna summary, training data, selection metric, CV and
+student-test metrics, preprocessing configuration, library versions). `MapMatcher.load()` reloads it in a fresh
+process. Road networks are read per trip at request time.
+
+### Start the backend (Laptop 1)
+
+```powershell
+cd "<repo>"
+.\setup_windows.bat                                   # once: venv + requirements
+# Administrator PowerShell, once:
+New-NetFirewallRule -DisplayName "PathSnap API 8000" -Direction Inbound -Protocol TCP -LocalPort 8000 -Action Allow -Profile Private,Public
+# evaluator trips (when provided): a folder containing <trip_id>\<trip_id>.track/.nodes/.arcs[/.route]
+$env:PATHSNAP_EVAL_DIR = "D:\evaluator_test"          # omit -> serves student_test (dev mode, /health says so)
+.\run_api.bat                                         # = .venv\Scripts\python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+```
+
+### Start the frontend (Laptop 2) and connect
+
+```powershell
+cd frontend; npm install; npm run dev:lan             # http://<laptop2>:5173
+# open http://localhost:5173/?api=http://<Laptop-1-IPv4>:8000
+```
+
+### Integration checks
+
+```powershell
+.venv\Scripts\python -m pytest tests -q                                        # Python: unit, integrity, model, API
+cd frontend; npx vitest run --config ../integration/vitest.config.mts; cd ..   # real API JSON through validate.ts
+.venv\Scripts\python integration\e2e_browser.py                                # Edge -> UI -> API -> model (needs both servers)
+```
 
 ## Academic integrity
 

@@ -1,0 +1,11 @@
+{
+ "status": "ok",
+ "model_loaded": true,
+ "model_name": "XGBoost (tuned) + HMM/Viterbi",
+ "hmm_enabled": true,
+ "version": "1.0.0",
+ "num_evaluation_trips": 10,
+ "evaluation_partition": "student_test",
+ "evaluation_partition_is_fallback": true,
+ "uptime_s": 10.0
+}

@@ -52,3 +52,17 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# ---------------------------------------------------------------------------
+# Laptop 1 (ML pipeline + API)
+# ---------------------------------------------------------------------------
+# Regenerable intermediate datasets (scripts/02_build_dataset.py)
+cache/
+# API runtime logs
+logs/
+# Per-model experiment scores (regenerable by scripts/03_train_models.py)
+reports/experiments/st_scores_*.npy
+# Comparison-model weights > 50 MB (regenerable by scripts/03_train_models.py);
+# the FINAL model bundle artifacts/final/ is committed.
+artifacts/models/random_forest.joblib
+artifacts/models/extra_trees.joblib

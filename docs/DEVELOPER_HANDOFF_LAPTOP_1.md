@@ -112,7 +112,7 @@ New-NetFirewallRule -DisplayName "PathSnap API 8000" -Direction Inbound -Protoco
 
 # 3. Allow Laptop 2's origin and start on all interfaces
 $env:PATHSNAP_CORS_ORIGINS = "http://<Laptop-2-IP>:5173,http://<Laptop-2-IP>:4173,http://localhost:5173"
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --log-level info
+.venv\Scripts\python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --log-level info   # repo root (or run_api.bat)
 ```
 
 `--host 0.0.0.0` is what exposes the API to Laptop 2. `127.0.0.1` would only accept local connections. Keep this terminal visible during the demo: the evaluator must see the `POST /evaluation/run` request logs.

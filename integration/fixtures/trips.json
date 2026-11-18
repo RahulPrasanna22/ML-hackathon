@@ -1,0 +1,65 @@
+{
+ "partition": "student_test",
+ "trips": [
+  {
+   "trip_id": "00000000",
+   "num_observations": 2503,
+   "duration_s": 2503.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000007",
+   "num_observations": 1354,
+   "duration_s": 1353.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000009",
+   "num_observations": 1049,
+   "duration_s": 1049.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000040",
+   "num_observations": 2995,
+   "duration_s": 2994.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000052",
+   "num_observations": 262,
+   "duration_s": 265.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000056",
+   "num_observations": 3958,
+   "duration_s": 4000.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000065",
+   "num_observations": 768,
+   "duration_s": 1037.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000076",
+   "num_observations": 1486,
+   "duration_s": 2266.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000077",
+   "num_observations": 3911,
+   "duration_s": 3910.0,
+   "label": null
+  },
+  {
+   "trip_id": "00000091",
+   "num_observations": 874,
+   "duration_s": 873.0,
+   "label": null
+  }
+ ]
+}

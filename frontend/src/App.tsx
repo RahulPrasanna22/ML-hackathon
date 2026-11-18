@@ -7,6 +7,7 @@ import { ConnectionPanel } from './components/ConnectionPanel';
 import { Header } from './components/Header';
 import { HistoryPanel } from './components/HistoryPanel';
 import { MapPanel } from './components/MapPanel';
+import { ModelComparisonPanel } from './components/ModelComparison';
 import { Notice } from './components/Notice';
 import { OverviewBar } from './components/OverviewBar';
 import { ResultsPanel } from './components/ResultsPanel';
@@ -15,6 +16,7 @@ import { TripSelector } from './components/TripSelector';
 import { clientOptions, getEnvBaseUrl, resolveInitialBaseUrl, saveBaseUrl, type ResolvedBaseUrl } from './config';
 import { useBackendStatus } from './hooks/useBackendStatus';
 import { useEvaluation } from './hooks/useEvaluation';
+import { useModelComparison } from './hooks/useModelComparison';
 import { useTrips } from './hooks/useTrips';
 import { clearStoredHistory, entryFromError, entryFromResult, loadHistory, MAX_HISTORY, saveHistory, type HistoryEntry } from './lib/history';
 
@@ -30,6 +32,7 @@ export default function App() {
   const client = useMemo(() => (base.url === null ? null : new PathSnapClient(base.url, clientOptions())), [base.url]);
   const { status, check } = useBackendStatus(client);
   const trips = useTrips(client);
+  const modelComparison = useModelComparison(client);
 
   const pushHistory = useCallback((entry: HistoryEntry) => {
     setHistory((prev) => {
@@ -147,6 +150,7 @@ export default function App() {
           <MapPanel result={shown} running={running} resolveUrl={(p) => (client ? client.resolve(p) : p)} />
           {shown && <ResultsPanel result={shown} roundTripMs={evaluation.roundTripMs} />}
           <Charts result={shown} history={history} />
+          <ModelComparisonPanel state={modelComparison} />
         </main>
       </div>
 
