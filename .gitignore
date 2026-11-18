@@ -1,0 +1,54 @@
+# ---------------------------------------------------------------------------
+# PathSnap repository ignore rules (public repository)
+# ---------------------------------------------------------------------------
+
+# Raw dataset: kept locally, not published (large, and contains reference
+# .route labels). Each developer keeps their own copy in this folder.
+Student folder/
+data/raw/
+*.track
+*.nodes
+*.arcs
+*.route
+
+# Course-issued hackathon handouts: kept locally, not republished.
+PathSnap_student_materials/
+
+# Any evaluator-only data must never be committed.
+evaluator_test/
+**/evaluator_test/
+
+# Secrets / local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials*.json
+
+# Node / frontend
+node_modules/
+dist/
+coverage/
+.vite/
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
