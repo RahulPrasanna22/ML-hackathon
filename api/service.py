@@ -71,6 +71,8 @@ def _route(net, arcs_local) -> dict:
 
 def _nearby_arcs(net, df, radius=ROAD_NETWORK_RADIUS_M) -> np.ndarray:
     """Arcs whose midpoint lies within `radius` of any GPS fix (nearby subset for drawing)."""
+    if net.n_arcs == 0:   # road network entirely outside the cropped trip area (length.max() would raise)
+        return np.zeros(0, dtype=np.int64)
     tree = cKDTree(np.c_[df.x.to_numpy(), df.y.to_numpy()])
     mx, my = (net.ax + net.bx) / 2, (net.ay + net.by) / 2
     d, _ = tree.query(np.c_[mx, my], k=1, distance_upper_bound=radius + net.length.max() / 2)
@@ -108,8 +110,14 @@ class PredictionService:
                            "selection_metric": m.get("selection_metric")}
 
     def predict(self, partition: str, trip_id: str) -> tuple[dict, dict]:
+        """Raises io.TripDataError if the trip's files are unreadable or unusable (mapped to HTTP 422).
+
+        Non-fatal data-quality notes are returned in result["data_warnings"].
+        """
         trip = io.load_trip(partition, trip_id)   # track + network only (never .route)
+        data_warnings = io.check_trip_for_inference(trip)
         res = self.matcher.match_trip(trip)
+        res["data_warnings"] = data_warnings
         net, df = res["net"], res["df"]
         hmm_arc = res["hmm_arc_local"]
         obs = [{"index": int(i), "lon": float(lo), "lat": float(la), "t": float(t),

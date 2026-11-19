@@ -249,6 +249,8 @@ Implemented in `api/main.py` (routes), `api/service.py` (prediction vs evaluatio
 * `[lon, lat]` everywhere, fractions in `[0, 1]`, times in ms, zero-padded string trip ids.
 * Errors use FastAPI's `{"detail": ...}`: `404` unknown trip / evaluation id, `422` invalid body
   (`trip_id` must match `^[0-9A-Za-z_-]+$`), `503` model not loaded, `500` pipeline failure.
+* `422` with a **string** `detail` (starting `Trip data rejected by Laptop 1:`) when the trip's own files cannot be
+  matched; see [Trip data validation](#trip-data-validation) below.
 * `reference_route` is **never** sent (not even for student-test trips). Laptop 1's Folium map endpoint also omits it.
 * `observations[].index` is the row index in the raw `.track` file; `matched_arc_id` is the HMM prediction.
 * `road_network.segments` = arcs whose midpoint is within ~150 m of a GPS fix (typically 1–5 k arcs).
@@ -291,6 +293,27 @@ All are computed on Laptop 1 after prediction, from the trip's `.route` aligned 
 
 `inference_ms` (full prediction, headline), `preprocessing_ms`, `candidate_generation_ms` (candidates + features),
 `classifier_ms`, `hmm_ms` (Viterbi), `route_reconstruction_ms`, `evaluation_ms` (server-side scoring), `total_ms`.
+
+### Trip data validation
+
+Before matching, `POST /evaluation/run` runs `pathsnap.io.check_trip_for_inference` on the trip's
+`.track/.nodes/.arcs` (never `.route`). It is O(n) and adds about 10 ms on a 360k-arc network.
+
+| Situation | Response |
+|---|---|
+| unparseable file (non-numeric tokens, header line, ragged rows, wrong column count) | `422`, `detail` names the file |
+| `.arcs` ids that are not plain integers (decimals, missing fields, beyond int64) | `422`, `detail` names the file |
+| `.nodes`/`.arcs` missing from the trip folder | `422`, `detail` names the file (no server paths) |
+| empty `.track`/`.nodes`/`.arcs`; no GPS fix with valid coordinates and timestamp; an infinite timestamp | `422` |
+| arc endpoint outside `0..n_nodes-1` (also negative ids, which NumPy would otherwise wrap silently) | `422` |
+| a node used by an arc has NaN or out-of-range coordinates | `422` |
+| some fixes invalid or with duplicate timestamps; self-loop arcs; a single valid fix | `200`, explained in `warnings` |
+| road network does not cover the GPS track (nothing to match) | `200`, empty route, explained in `warnings` |
+
+`GET /evaluation/trips` keeps listing the other trips when one trip's `.track` is unreadable: that trip is returned
+with `num_observations: null`, `duration_s: null`, `label: "<trip_id> (unreadable trip data)"` (the UI's trip
+button shows `label` in place of the id, so the id is kept in it). Both fields were already
+optional for the UI (`parseTrip` in `frontend/src/api/validate.ts` accepts `null`).
 
 ### Evaluator trips
 

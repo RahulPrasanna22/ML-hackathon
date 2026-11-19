@@ -13,6 +13,8 @@ import traceback
 from contextlib import asynccontextmanager
 from pathlib import Path
 
+import numpy as np
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fastapi import FastAPI, HTTPException, Request
@@ -109,13 +111,24 @@ def health():
 
 @app.get("/evaluation/trips", response_model=TripListResponse, tags=["evaluation"])
 def list_evaluation_trips():
-    """Trip ids plus harmless metadata (observation count, duration). Never routes or labels."""
+    """Trip ids plus harmless metadata (observation count, duration). Never routes or labels.
+
+    A trip whose .track cannot be read is still listed (null metadata + label) instead of failing the
+    whole list, so one corrupt file does not hide the other trips from the evaluator UI.
+    """
     part = STATE["partition"]
     trips = []
     for tid in io.list_trips(part):
-        tr = io.load_track(part, tid)
+        try:
+            tr = io.load_track(part, tid)
+        except (io.TripDataError, OSError) as e:
+            log.warning("Trip %s/%s has an unreadable .track file: %s", part, tid, e)
+            trips.append(TripSummary(trip_id=tid, num_observations=None, duration_s=None,
+                                     label=f"{tid} (unreadable trip data)"))  # UI shows label instead of id
+            continue
+        t = tr.t[np.isfinite(tr.t)]   # NaN/inf timestamps would make duration_s non-JSON-compliant
         trips.append(TripSummary(trip_id=tid, num_observations=len(tr),
-                                 duration_s=float(tr.t.iloc[-1] - tr.t.iloc[0]) if len(tr) else 0.0))
+                                 duration_s=float(t.iloc[-1] - t.iloc[0]) if len(t) else 0.0))
     return TripListResponse(partition=part, trips=trips)
 
 
@@ -129,7 +142,15 @@ def run_evaluation(req: RunRequest):
     log.info("RUN id=%s trip=%s partition=%s", eid, req.trip_id, part)
     # 1) prediction: GPS + road network only
     t0 = time.perf_counter()
-    result, payload = ps.predict(part, req.trip_id)
+    try:
+        result, payload = ps.predict(part, req.trip_id)
+    except io.TripDataError as e:     # unreadable / unusable trip files -> clear client-visible reason
+        log.warning("RUN id=%s trip=%s rejected: %s", eid, req.trip_id, e)
+        raise HTTPException(422, f"Trip data rejected by Laptop 1: {e}")
+    except FileNotFoundError as e:    # trip folder lacks .nodes/.arcs (name only, no server paths)
+        log.warning("RUN id=%s trip=%s missing file: %s", eid, req.trip_id, e)
+        raise HTTPException(422, f"Trip data rejected by Laptop 1: trip '{req.trip_id}' is missing "
+                                 f"{Path(str(e.filename or e)).name}")
     inference_ms = 1000 * (time.perf_counter() - t0)
     # 2) evaluation: reference route loaded server-side, after prediction
     t1 = time.perf_counter()
@@ -145,7 +166,9 @@ def run_evaluation(req: RunRequest):
               "route_reconstruction_ms": 1000 * tm["route_reconstruction_s"],
               "evaluation_ms": evaluation_ms,
               "total_ms": inference_ms + evaluation_ms}
-    warnings = []
+    warnings = list(result.get("data_warnings", []))
+    if not payload["predicted_route"]["arc_ids"]:
+        warnings.append("No road segment could be matched: the trip's road network does not cover the GPS track.")
     if m_hmm is None:
         warnings.append("No reference route on Laptop 1 for this trip: metrics unavailable.")
     if result["route_unfilled_gaps"]:

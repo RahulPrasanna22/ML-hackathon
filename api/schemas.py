@@ -26,8 +26,8 @@ class HealthResponse(BaseModel):
 
 class TripSummary(BaseModel):
     trip_id: str
-    num_observations: int
-    duration_s: float
+    num_observations: Optional[int] = Field(None, description="null if the trip's .track file is unreadable")
+    duration_s: Optional[float] = Field(None, description="null if the trip's .track file is unreadable")
     label: Optional[str] = None
 
 

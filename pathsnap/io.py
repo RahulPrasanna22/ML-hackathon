@@ -49,15 +49,30 @@ def _trip_path(partition: str, trip_id: str, ext: str) -> Path:
     return partition_dir(partition) / trip_id / f"{trip_id}.{ext}"
 
 
+class TripDataError(ValueError):
+    """A trip's raw files cannot be parsed, or are unusable for prediction (see check_trip_for_inference)."""
+
+
 def _read_table(path: Path, ncols: int, dtype) -> np.ndarray:
     if not path.exists():
         raise FileNotFoundError(path)
     if path.stat().st_size == 0:
         return np.zeros((0, ncols), dtype=dtype)
-    df = pd.read_csv(path, sep=r"\s+", header=None, engine="c")
+    try:
+        df = pd.read_csv(path, sep=r"\s+", header=None, engine="c")
+    except pd.errors.EmptyDataError:      # whitespace-only file
+        return np.zeros((0, ncols), dtype=dtype)
+    except (pd.errors.ParserError, UnicodeDecodeError) as e:
+        raise TripDataError(f"{path.name}: unreadable ({type(e).__name__}: {str(e).strip()[:120]})") from e
     if df.shape[1] != ncols:
-        raise ValueError(f"{path.name}: expected {ncols} columns, found {df.shape[1]}")
-    return df.to_numpy(dtype=dtype)
+        raise TripDataError(f"{path.name}: expected {ncols} columns, found {df.shape[1]}")
+    if np.issubdtype(dtype, np.integer) and not all(pd.api.types.is_integer_dtype(t) for t in df.dtypes):
+        # ids parsed as float/object: decimals ("1.5") or missing fields (NaN) would be silently truncated / wrapped
+        raise TripDataError(f"{path.name}: expected integer ids only (found decimals, missing fields or text)")
+    try:
+        return df.to_numpy(dtype=dtype)
+    except (ValueError, TypeError, OverflowError) as e:  # non-numeric tokens, ids beyond int64
+        raise TripDataError(f"{path.name}: non-numeric or wrongly typed values ({str(e)[:120]})") from e
 
 
 def load_track(partition: str, trip_id: str) -> pd.DataFrame:
@@ -135,3 +150,57 @@ def validate_trip(trip: Trip, route: Optional[np.ndarray] = None) -> dict:
             rep["route_repeated_consecutive"] = int(np.sum(route[:-1] == route[1:]))
             rep["route_unique_arcs"] = int(len(np.unique(route)))
     return rep
+
+
+def check_trip_for_inference(trip: Trip) -> list[str]:
+    """Pre-flight check run before a trip is matched (API and any other prediction caller).
+
+    Raises TripDataError for data the pipeline cannot match correctly. Without this check those
+    cases surface as opaque IndexError/ValueError, or worse, run silently on corrupted geometry
+    (a negative node id is a valid NumPy index and would wrap around to the last node).
+    Returns human-readable data-quality warnings for problems the pipeline repairs on its own
+    (the same ones `preprocess.clean_track` drops). Never reads the .route file.
+    """
+    from .preprocess import clean_track   # same cleaning rules as the pipeline (local import: io stays a leaf module)
+
+    # O(n) checks only (no row-wise np.unique): this runs on every request, networks reach ~300k arcs
+    tid, nodes, arcs = trip.trip_id, trip.nodes, trip.arcs
+    n_obs, n_nodes, n_arcs = len(trip.track), len(nodes), len(arcs)
+    problems = []
+    if n_obs == 0:
+        problems.append("the .track file has no GPS observations")
+    if n_nodes == 0:
+        problems.append("the .nodes file is empty")
+    if n_arcs == 0:
+        problems.append("the .arcs file is empty")
+    n_bad_ref = int(np.count_nonzero((arcs < 0) | (arcs >= n_nodes)))
+    if n_bad_ref:
+        problems.append(f"{n_bad_ref} arc endpoint(s) reference node ids outside 0..{n_nodes - 1}")
+    elif n_arcs and n_nodes:
+        used = np.zeros(n_nodes, dtype=bool)
+        used[arcs.ravel()] = True
+        lon, lat = nodes[used, 0], nodes[used, 1]
+        bad = int(np.count_nonzero(~(np.isfinite(lon) & np.isfinite(lat)) | (np.abs(lon) > 180) | (np.abs(lat) > 90)))
+        if bad:
+            problems.append(f"{bad} node(s) used by arcs have missing or out-of-range coordinates")
+    n_inf_t = int(np.count_nonzero(np.isinf(trip.track["t"].to_numpy(dtype=np.float64)))) if n_obs else 0
+    if n_inf_t:   # clean_track drops NaN but keeps +/-inf timestamps; they would break dt features and JSON output
+        problems.append(f"{n_inf_t} GPS observation(s) have an infinite timestamp")
+    _, info = clean_track(trip.track) if n_obs else (None, {"n_clean": 0})
+    if n_obs and info["n_clean"] == 0:
+        problems.append(f"none of the {n_obs} GPS observations has valid coordinates and timestamp")
+    if problems:
+        raise TripDataError(f"Trip '{tid}' cannot be matched: " + "; ".join(problems))
+
+    warnings = []
+    if info["n_invalid_dropped"]:
+        warnings.append(f"{info['n_invalid_dropped']} of {n_obs} GPS observation(s) had missing, out-of-range "
+                        f"or (0, 0) coordinates and were ignored.")
+    if info["n_duplicate_t_dropped"]:
+        warnings.append(f"{info['n_duplicate_t_dropped']} GPS observation(s) with a duplicate timestamp were ignored.")
+    if info["n_clean"] == 1:
+        warnings.append("Only one valid GPS observation: speed, heading and transition features are unavailable.")
+    n_loops = int(np.count_nonzero(arcs[:, 0] == arcs[:, 1])) if n_arcs else 0
+    if n_loops:
+        warnings.append(f"{n_loops} self-loop arc(s) in the road network were ignored.")
+    return warnings

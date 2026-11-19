@@ -59,8 +59,10 @@ def test_explicit_eval_dir_invalid_raises(tmp_path, monkeypatch, case):
     d = tmp_path / "evaldir"
     if case == "empty":
         d.mkdir()
-    if case == "incomplete":
-        _copy_trip_without_route(d, ST[0], exts=("track", "nodes"))   # .arcs missing
+    if case == "incomplete":   # synthetic files: only file presence is checked, so no dataset is needed
+        (d / "00000001").mkdir(parents=True)
+        for e in ("track", "nodes"):                                   # .arcs missing
+            (d / "00000001" / f"00000001.{e}").write_text("0 0 0\n")
     monkeypatch.setattr(config, "EVAL_DIR_OVERRIDE", str(d))
     with pytest.raises(EvaluatorConfigError):
         resolve_eval_partition()
